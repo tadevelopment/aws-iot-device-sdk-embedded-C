@@ -21,12 +21,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <unistd.h>
+
 
 #include <signal.h>
 #include <memory.h>
-#include <sys/time.h>
 #include <limits.h>
+
+#ifndef WIN32
+#include <sys/time.h>
+#include <unistd.h>
+#else
+#define PATH_MAX 512
+#define NOGDI
+#define WIN32_LEAN_AND_MEAN
+#define VC_EXTRALEAN
+
+#include <tchar.h>
+#include <direct.h>
+#include <XGetopt.h>
+#include <Windows.h>
+#define sleep(x) Sleep(x)
+#endif
 
 #include "aws_iot_log.h"
 #include "aws_iot_version.h"
@@ -34,6 +49,7 @@
 #include "aws_iot_shadow_json_data.h"
 #include "aws_iot_config.h"
 #include "aws_iot_mqtt_interface.h"
+
 
 /*!
  * The goal of this sample application is to demonstrate the capabilities of shadow.

@@ -28,7 +28,12 @@
 #define __TIMER_INTERFACE_H_
 
 // Add the platform specific timer includes to define the Timer struct
+
+#ifdef _WIN32
+#include "timer_windows.h"
+#else
 #include "timer_linux.h"
+#endif
 
 /**
  * @brief Timer Type
@@ -39,6 +44,7 @@
  *
  */
 typedef struct Timer Timer;
+
 
 /**
  * @brief Check if a timer is expired
