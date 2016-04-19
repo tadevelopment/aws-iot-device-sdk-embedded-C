@@ -23,14 +23,9 @@
 #include <openssl/pem.h>
 #include <openssl/x509.h>
 #include <openssl/x509_vfy.h>
-//#include <sys/socket.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
-//#include <sys/select.h>
-//#include <arpa/inet.h>
-//#include <netinet/in.h>
-//#include <netdb.h>
 
 #include <windows.h>
 #include <winsock2.h>

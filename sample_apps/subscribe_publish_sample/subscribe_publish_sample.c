@@ -28,12 +28,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <unistd.h>
 
 #include <signal.h>
 #include <memory.h>
-#include <sys/time.h>
 #include <limits.h>
+
+#ifndef WIN32
+#include <sys/time.h>
+#include <unistd.h>
+#else
+#define PATH_MAX 512
+#include <direct.h>
+#include <windows.h>
+#include <XGetopt.h>
+#define sleep(x) Sleep(x)
+#endif
 
 #include "aws_iot_log.h"
 #include "aws_iot_version.h"
@@ -69,7 +78,7 @@ void disconnectCallbackHandler(void) {
 /**
  * @brief Default cert location
  */
-char certDirectory[PATH_MAX + 1] = "../../certs";
+char certDirectory[PATH_MAX + 1] = "../certs";
 
 /**
  * @brief Default MQTT HOST URL is pulled from the aws_iot_config.h
@@ -213,9 +222,9 @@ int main(int argc, char** argv) {
 			&& (publishCount > 0 || infinitePublishFlag)) {
 
 		//Max time the yield function will wait for read messages
-		rc = aws_iot_mqtt_yield(100);
+		rc = aws_iot_mqtt_yield(200);
 		if(NETWORK_ATTEMPTING_RECONNECT == rc){
-			INFO("-->sleep");
+			INFO("-->reconnecting");
 			sleep(1);
 			// If the client is attempting to reconnect we will skip the rest of the loop.
 			continue;
