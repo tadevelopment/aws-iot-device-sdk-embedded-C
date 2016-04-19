@@ -107,7 +107,7 @@ void windowActuate_Callback(const char *pJsonString, uint32_t JsonStringDataLen,
 	}
 }
 
-char certDirectory[PATH_MAX + 1] = "../../certs";
+char certDirectory[PATH_MAX + 1] = "../certs";
 char HostAddress[255] = AWS_IOT_MQTT_HOST;
 uint32_t port = AWS_IOT_MQTT_PORT;
 uint8_t numPubs = 5;
@@ -189,7 +189,7 @@ int main(int argc, char** argv) {
 
 	INFO("\nAWS IoT SDK Version(dev) %d.%d.%d-%s\n", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH, VERSION_TAG);
 
-	getcwd(CurrentWD, sizeof(CurrentWD));
+	_getcwd(CurrentWD, sizeof(CurrentWD));
 	sprintf(rootCA, "%s/%s/%s", CurrentWD, certDirectory, cafileName);
 	sprintf(clientCRT, "%s/%s/%s", CurrentWD, certDirectory, clientCRTName);
 	sprintf(clientKey, "%s/%s/%s", CurrentWD, certDirectory, clientKeyName);
@@ -236,7 +236,7 @@ int main(int argc, char** argv) {
 
 	// loop and publish a change in temperature
 	while (NETWORK_ATTEMPTING_RECONNECT == rc || RECONNECT_SUCCESSFUL == rc || NONE_ERROR == rc) {
-		rc = aws_iot_shadow_yield(&mqttClient, 200);
+		rc = aws_iot_shadow_yield(&mqttClient, 500);
 		if (NETWORK_ATTEMPTING_RECONNECT == rc) {
 			sleep(1);
 			// If the client is attempting to reconnect we will skip the rest of the loop.

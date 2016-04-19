@@ -127,7 +127,8 @@ IoT_Error_t aws_iot_mqtt_connect(MQTTConnectParams *pParams) {
 	TLSParams.ServerVerificationFlag = pParams->isSSLHostnameVerify;
 
 	// This implementation assumes you are not going to switch between cleansession 1 to 0
-	// As we don't have a default subscription handler support in the MQTT client every time a device power cycles it has to re-subscribe to let the MQTT client to pass the message up to the application callback.
+	// As we don't have a default subscription handler support in the MQTT client every time 
+	// a device power cycles it has to re-subscribe to let the MQTT client to pass the message up to the application callback.
 	// The default message handler will be implemented in the future revisions.
 	if(pParams->isCleansession || isPowerCycle){
 		pahoRc = MQTTClient(&c, (unsigned int)(pParams->mqttCommandTimeout_ms), writebuf,

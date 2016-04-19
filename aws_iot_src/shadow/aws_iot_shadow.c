@@ -79,7 +79,7 @@ IoT_Error_t aws_iot_shadow_connect(MQTTClient_t *pClient, ShadowParameters_t *pP
 
 	ConnectParams.KeepAliveInterval_sec = 10;
 	ConnectParams.MQTTVersion = MQTT_3_1_1;
-	ConnectParams.mqttCommandTimeout_ms = 2000;
+	ConnectParams.mqttCommandTimeout_ms = 10000;
 	ConnectParams.tlsHandshakeTimeout_ms = 10000;
 	ConnectParams.isCleansession = true;
 	ConnectParams.isSSLHostnameVerify = true;
