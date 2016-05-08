@@ -73,18 +73,20 @@
  }
  */
 
-#define ROOMTEMPERATURE_UPPERLIMIT 32.0f
-#define ROOMTEMPERATURE_LOWERLIMIT 25.0f
-#define STARTING_ROOMTEMPERATURE ROOMTEMPERATURE_LOWERLIMIT
+//#define ROOMTEMPERATURE_UPPERLIMIT 27.0f
+//#define ROOMTEMPERATURE_LOWERLIMIT 25.0f
+#define STARTING_ROOMTEMPERATURE 25 //;ROOMTEMPERATURE_LOWERLIMIT
+
+static float deltaChange = 0.5;
 
 static void simulateRoomTemperature(float *pRoomTemperature) {
-	static float deltaChange;
+	//static float deltaChange;
 
-	if (*pRoomTemperature >= ROOMTEMPERATURE_UPPERLIMIT) {
-		deltaChange = -0.5f;
-	} else if (*pRoomTemperature <= ROOMTEMPERATURE_LOWERLIMIT) {
-		deltaChange = 0.5f;
-	}
+	//if (*pRoomTemperature >= ROOMTEMPERATURE_UPPERLIMIT) {
+	//	deltaChange = -0.5f;
+	//} else if (*pRoomTemperature <= ROOMTEMPERATURE_LOWERLIMIT) {
+	//	deltaChange = 0.5f;
+	//}
 
 	*pRoomTemperature += deltaChange;
 }
@@ -103,7 +105,14 @@ void ShadowUpdateStatusCallback(const char *pThingName, ShadowActions_t action, 
 
 void windowActuate_Callback(const char *pJsonString, uint32_t JsonStringDataLen, jsonStruct_t *pContext) {
 	if (pContext != NULL) {
-		INFO("Delta - Window state changed to %d", *(bool *)(pContext->pData));
+		bool windowOpen = *(bool *)(pContext->pData);
+
+		if (windowOpen)
+			deltaChange = -0.5f;
+		else
+			deltaChange = +0.5f;
+
+		INFO("======= Delta - Window state changed to %d", *(bool *)(pContext->pData));
 	}
 }
 
@@ -236,7 +245,7 @@ int main(int argc, char** argv) {
 
 	// loop and publish a change in temperature
 	while (NETWORK_ATTEMPTING_RECONNECT == rc || RECONNECT_SUCCESSFUL == rc || NONE_ERROR == rc) {
-		rc = aws_iot_shadow_yield(&mqttClient, 500);
+		rc = aws_iot_shadow_yield(&mqttClient, 2000);
 		if (NETWORK_ATTEMPTING_RECONNECT == rc) {
 			sleep(1);
 			// If the client is attempting to reconnect we will skip the rest of the loop.

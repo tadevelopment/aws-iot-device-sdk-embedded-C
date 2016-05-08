@@ -166,7 +166,7 @@ static bool isAckForMyThingName(const char *pTopicName) {
 static int AckStatusCallback(MQTTCallbackParams params) {
 	int32_t tokenCount;
 	int32_t i;
-	void *pJsonHandler;
+	void *pJsonHandler = NULL;
 	char temporaryClientToken[MAX_SIZE_CLIENT_ID_WITH_SEQUENCE];
 
 	if (params.MessageParams.PayloadLen > SHADOW_MAX_SIZE_OF_RX_BUFFER) {
@@ -441,7 +441,7 @@ static int shadow_delta_callback(MQTTCallbackParams params) {
 
 	int32_t tokenCount;
 	uint32_t i = 0;
-	void *pJsonHandler;
+	void *pJsonHandler = NULL;
 	int32_t DataPosition;
 	uint32_t dataLength;
 
