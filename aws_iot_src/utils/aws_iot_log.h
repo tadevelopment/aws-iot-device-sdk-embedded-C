@@ -39,6 +39,9 @@
  * Macro to expose function, line number as well as desired log message.
  */
 #ifdef IOT_DEBUG
+#ifdef DEBUG
+#undef DEBUG
+#endif
 #define DEBUG(...)    \
     {\
     printf("DEBUG:   %s L#%d ", __FUNCTION__, __LINE__);  \
@@ -46,8 +49,10 @@
     printf("\n"); \
     }
 #else
+#ifndef DEBUG
 #define DEBUG(...)
-#endif
+#endif // DEBUG
+#endif // IOT_DEBUG
 
  /**
  * @brief Info level logging macro.
@@ -86,6 +91,9 @@
  * Macro to expose function, line number as well as desired log message.
  */
 #ifdef IOT_ERROR
+#ifdef ERROR
+#undef ERROR
+#endif
 #define ERROR(...)  \
     { \
     printf("ERROR: %s L#%d ", __FUNCTION__, __LINE__); \
@@ -93,8 +101,10 @@
     printf("\n"); \
     }
 #else
+#ifndef ERROR
 #define ERROR(...)
-#endif
+#endif // ERROR
+#endif // IOT_ERROR
 
 #else  // Win32/Linux
 

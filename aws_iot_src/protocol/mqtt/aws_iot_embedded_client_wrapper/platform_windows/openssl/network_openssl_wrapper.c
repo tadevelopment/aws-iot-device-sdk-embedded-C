@@ -51,7 +51,7 @@ struct TLSConnectParams;
 
 static int Create_TCPSocket( const TLSConnectParams* params );
 static IoT_Error_t Connect_TCPSocket();
-//static IoT_Error_t setSocketToNonBlocking( int server_fd );
+static IoT_Error_t setSocketToNonBlocking( );
 static IoT_Error_t ConnectOrTimeoutOrExitOnError( SSL *pSSL, int timeout_ms );
 static IoT_Error_t ReadOrTimeoutOrExitOnError( SSL *pSSL, unsigned char *msg, int totalLen, int timeout_ms );
 static IoT_Error_t WriteOrTimeoutOrExitOnError( SSL *pSSL, unsigned char *msg, int totalLen, int timeout_ms );
@@ -165,12 +165,12 @@ int iot_tls_connect(Network *pNetwork, TLSConnectParams params) {
 
 	SSL_set_fd(pSSLHandle, server_TCPSocket);
 
-	//if(ret_val == NONE_ERROR){
-	//	ret_val = setSocketToNonBlocking(server_TCPSocket);
-	//	if(ret_val != NONE_ERROR){
-	//		ERROR(" Unable to set the socket to Non-Blocking");
-	//	}
-	//}
+	if(ret_val == NONE_ERROR){
+		ret_val = setSocketToNonBlocking(server_TCPSocket);
+		if(ret_val != NONE_ERROR){
+			ERROR(" Unable to set the socket to Non-Blocking");
+		}
+	}
 
 	if(NONE_ERROR == ret_val){
 		ret_val = ConnectOrTimeoutOrExitOnError(pSSLHandle, params.timeout_ms);
@@ -275,25 +275,19 @@ IoT_Error_t Connect_TCPSocket() {
 	return ret_val;
 }
 
-//IoT_Error_t setSocketToNonBlocking( server_fd) {
-//
-//	int flags, status;
-//	IoT_Error_t ret_val = NONE_ERROR;
-//
-//	flags = fcntl(server_TCPSocket, F_GETFL, 0);
-//	// set underlying socket to non blocking
-//	if (flags < 0) {
-//		ret_val = TCP_CONNECT_ERROR;
-//	}
-//
-//	status = fcntl(server_TCPSocket, F_SETFL, flags | O_NONBLOCK);
-//	if (status < 0) {
-//		ERROR("fcntl - %s", strerror(errno));
-//		ret_val = TCP_CONNECT_ERROR;
-//	}
-//
-//	return ret_val;
-//}
+IoT_Error_t setSocketToNonBlocking( ) {
+
+	u_long iMode = 1;
+	int retval = ioctlsocket( server_TCPSocket, FIONBIO, &iMode );
+
+	if (retval != 0)
+	{
+		retval = WSAGetLastError();
+		// TODO: translate to a more accurate error-code
+		return TCP_CONNECT_ERROR;
+	}
+	return NONE_ERROR;
+}
 
 IoT_Error_t ConnectOrTimeoutOrExitOnError(SSL *pSSL, int timeout_ms){
 

@@ -93,7 +93,7 @@ uint32_t port = AWS_IOT_MQTT_PORT;
 /**
  * @brief This parameter will avoid infinite loop of publish and exit the program after certain number of publishes
  */
-uint32_t publishCount = 0;
+uint32_t publishCount = 20;
 
 void parseInputArgsForConnectParams(int argc, char** argv) {
 	int opt;
@@ -150,7 +150,7 @@ int main(int argc, char** argv) {
 
 	INFO("\nAWS IoT SDK Version %d.%d.%d-%s\n", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH, VERSION_TAG);
 
-	getcwd(CurrentWD, sizeof(CurrentWD));
+	_getcwd(CurrentWD, sizeof(CurrentWD));
 	sprintf(rootCA, "%s/%s/%s", CurrentWD, certDirectory, cafileName);
 	sprintf(clientCRT, "%s/%s/%s", CurrentWD, certDirectory, clientCRTName);
 	sprintf(clientKey, "%s/%s/%s", CurrentWD, certDirectory, clientKeyName);
@@ -222,7 +222,7 @@ int main(int argc, char** argv) {
 			&& (publishCount > 0 || infinitePublishFlag)) {
 
 		//Max time the yield function will wait for read messages
-		rc = aws_iot_mqtt_yield(200);
+		rc = aws_iot_mqtt_yield(5000);
 		if(NETWORK_ATTEMPTING_RECONNECT == rc){
 			INFO("-->reconnecting");
 			sleep(1);
