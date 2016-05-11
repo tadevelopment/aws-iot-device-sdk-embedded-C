@@ -31,7 +31,6 @@ typedef enum {
 	Error
 } HostnameValidationResult;
 
-struct X509;
 
 /**
 * Validates the server's identity by looking for the expected hostname in the
@@ -44,6 +43,6 @@ struct X509;
 * Returns MalformedCertificate if any of the hostnames had a NUL character embedded in it.
 * Returns Error if there was an error.
 */
-HostnameValidationResult validate_hostname(const char *hostname, const X509 *server_cert);
+HostnameValidationResult validate_hostname(const char *hostname, const WOLFSSL_X509 *server_cert);
 
 #endif //_OPENSSL_HOSTNAME_VALIDATION_C_
