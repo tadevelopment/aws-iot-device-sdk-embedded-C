@@ -25,7 +25,7 @@
  * definition of the Timer struct. Platform specific
  */
 struct Timer{
-	DWORD timeout_time;
+	unsigned int timeout_time;
 };
 
 

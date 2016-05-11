@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{389C4836-34CB-4495-8801-87070D8FF55A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>aws_iot_sdk</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)\build\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;IOT_DEBUG;IOT_INFO;IOT_WARN;IOT_ERROR;WOLFSSL_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)aws_mqtt_embedded_client_lib\MQTTClient-C\src\;$(ProjectDir)aws_iot_src\shadow;$(ProjectDir)aws_iot_src\protocol\mqtt;$(ProjectDir)aws_iot_src\utils;$(ProjectDir)aws_mqtt_embedded_client_lib\MQTTPacket\src;$(ProjectDir)sample_apps\shadow_sample\;$(ProjectDir)aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\;$(ProjectDir)..\wolfssl\IDE\WIN\;$(ProjectDir)..\wolfSSL\;$(ProjectDir)..\wolfSSL\wolfssl\;$(ProjectDir)..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>wolfssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\wolfssl\$(Configuration)\</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\network_interface.h" />
+    <ClInclude Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\common\timer_windows.h" />
+    <ClInclude Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\wolfssl\hostname_compare.h" />
+    <ClInclude Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\wolfSSL\wolfssl_hostname_validation.h" />
+    <ClInclude Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\wolfssl\rawstr.h" />
+    <ClInclude Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\timer_interface.h" />
+    <ClInclude Include="aws_iot_src\protocol\mqtt\aws_iot_mqtt_interface.h" />
+    <ClInclude Include="aws_iot_src\shadow\aws_iot_shadow_actions.h" />
+    <ClInclude Include="aws_iot_src\shadow\aws_iot_shadow_interface.h" />
+    <ClInclude Include="aws_iot_src\shadow\aws_iot_shadow_json.h" />
+    <ClInclude Include="aws_iot_src\shadow\aws_iot_shadow_json_data.h" />
+    <ClInclude Include="aws_iot_src\shadow\aws_iot_shadow_key.h" />
+    <ClInclude Include="aws_iot_src\shadow\aws_iot_shadow_records.h" />
+    <ClInclude Include="aws_iot_src\utils\aws_iot_error.h" />
+    <ClInclude Include="aws_iot_src\utils\aws_iot_json_utils.h" />
+    <ClInclude Include="aws_iot_src\utils\aws_iot_log.h" />
+    <ClInclude Include="aws_iot_src\utils\aws_iot_version.h" />
+    <ClInclude Include="aws_iot_src\utils\jsmn.h" />
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTClient-C\src\MQTTClient.h" />
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTConnect.h" />
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTMessage.h" />
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTPacket.h" />
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTPublish.h" />
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTReturnCodes.h" />
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTSubscribe.h" />
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTUnsubscribe.h" />
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\StackTrace.h" />
+    <ClInclude Include="sample_apps\subscribe_publish_sample\aws_iot_config.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\aws_iot_mqtt_embedded_client_wrapper.c" />
+    <ClCompile Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\common\timer.c" />
+    <ClCompile Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\wolfssl\hostname_compare.c" />
+    <ClCompile Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\wolfSSL\network_wolfssl_wrapper.c" />
+    <ClCompile Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\wolfSSL\wolfssl_hostname_validation.c" />
+    <ClCompile Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\wolfssl\rawstr.c" />
+    <ClCompile Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\XGetopt.c" />
+    <ClCompile Include="aws_iot_src\shadow\aws_iot_shadow.c" />
+    <ClCompile Include="aws_iot_src\shadow\aws_iot_shadow_actions.c" />
+    <ClCompile Include="aws_iot_src\shadow\aws_iot_shadow_json.c" />
+    <ClCompile Include="aws_iot_src\shadow\aws_iot_shadow_records.c" />
+    <ClCompile Include="aws_iot_src\utils\aws_iot_json_utils.c" />
+    <ClCompile Include="aws_iot_src\utils\jsmn.c" />
+    <ClCompile Include="aws_mqtt_embedded_client_lib\MQTTClient-C\src\MQTTClient.c" />
+    <ClCompile Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTConnectClient.c" />
+    <ClCompile Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTDeserializePublish.c" />
+    <ClCompile Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTPacket.c" />
+    <ClCompile Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTSerializePublish.c" />
+    <ClCompile Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTSubscribeClient.c" />
+    <ClCompile Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTUnsubscribeClient.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

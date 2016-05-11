@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\aws_iot_src">
+      <UniqueIdentifier>{1d8bfbc7-4ffa-41fd-a66f-666151dbe36d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\aws_iot_src\protocol">
+      <UniqueIdentifier>{52a3065f-9b2f-4904-ad13-df6e1a4f9391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\aws_iot_src\shadow">
+      <UniqueIdentifier>{d7d7dd34-f0e0-475a-80a6-f1c6f5e90412}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\aws_iot_src\utils">
+      <UniqueIdentifier>{45cca810-dfe7-42d3-bbc9-eec31a6e3e6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mqtt_client_lib">
+      <UniqueIdentifier>{ff6b1869-5ce1-4da9-9fdb-eefb04790bd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\aws_iot_src\protocol\wolfssl">
+      <UniqueIdentifier>{110a7515-d6ad-4c41-9eee-7bf56500f8d4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\network_interface.h">
+      <Filter>Source Files\aws_iot_src\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\common\timer_windows.h">
+      <Filter>Source Files\aws_iot_src\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\timer_interface.h">
+      <Filter>Source Files\aws_iot_src\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\protocol\mqtt\aws_iot_mqtt_interface.h">
+      <Filter>Source Files\aws_iot_src\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\shadow\aws_iot_shadow_actions.h">
+      <Filter>Source Files\aws_iot_src\shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\shadow\aws_iot_shadow_interface.h">
+      <Filter>Source Files\aws_iot_src\shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\shadow\aws_iot_shadow_json.h">
+      <Filter>Source Files\aws_iot_src\shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\shadow\aws_iot_shadow_json_data.h">
+      <Filter>Source Files\aws_iot_src\shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\shadow\aws_iot_shadow_key.h">
+      <Filter>Source Files\aws_iot_src\shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\shadow\aws_iot_shadow_records.h">
+      <Filter>Source Files\aws_iot_src\shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\utils\aws_iot_error.h">
+      <Filter>Source Files\aws_iot_src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\utils\aws_iot_json_utils.h">
+      <Filter>Source Files\aws_iot_src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\utils\aws_iot_log.h">
+      <Filter>Source Files\aws_iot_src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\utils\aws_iot_version.h">
+      <Filter>Source Files\aws_iot_src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\utils\jsmn.h">
+      <Filter>Source Files\aws_iot_src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTClient-C\src\MQTTClient.h">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTConnect.h">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTMessage.h">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTPacket.h">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTPublish.h">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTReturnCodes.h">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTSubscribe.h">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTUnsubscribe.h">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\StackTrace.h">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\wolfssl\rawstr.h">
+      <Filter>Source Files\aws_iot_src\protocol\wolfssl</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\wolfssl\hostname_compare.h">
+      <Filter>Source Files\aws_iot_src\protocol\wolfssl</Filter>
+    </ClInclude>
+    <ClInclude Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\wolfSSL\wolfssl_hostname_validation.h">
+      <Filter>Source Files\aws_iot_src\protocol\wolfssl</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\aws_iot_mqtt_embedded_client_wrapper.c">
+      <Filter>Source Files\aws_iot_src\protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\common\timer.c">
+      <Filter>Source Files\aws_iot_src\protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_iot_src\shadow\aws_iot_shadow.c">
+      <Filter>Source Files\aws_iot_src\shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_iot_src\shadow\aws_iot_shadow_actions.c">
+      <Filter>Source Files\aws_iot_src\shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_iot_src\shadow\aws_iot_shadow_json.c">
+      <Filter>Source Files\aws_iot_src\shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_iot_src\shadow\aws_iot_shadow_records.c">
+      <Filter>Source Files\aws_iot_src\shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_iot_src\utils\aws_iot_json_utils.c">
+      <Filter>Source Files\aws_iot_src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_iot_src\utils\jsmn.c">
+      <Filter>Source Files\aws_iot_src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_mqtt_embedded_client_lib\MQTTClient-C\src\MQTTClient.c">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTConnectClient.c">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTDeserializePublish.c">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTPacket.c">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTSerializePublish.c">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTSubscribeClient.c">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_mqtt_embedded_client_lib\MQTTPacket\src\MQTTUnsubscribeClient.c">
+      <Filter>Source Files\mqtt_client_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XGetopt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\wolfssl\rawstr.c">
+      <Filter>Source Files\aws_iot_src\protocol\wolfssl</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\wolfssl\hostname_compare.c">
+      <Filter>Source Files\aws_iot_src\protocol\wolfssl</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\wolfSSL\network_wolfssl_wrapper.c">
+      <Filter>Source Files\aws_iot_src\protocol\wolfssl</Filter>
+    </ClCompile>
+    <ClCompile Include="aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\wolfSSL\wolfssl_hostname_validation.c">
+      <Filter>Source Files\aws_iot_src\protocol\wolfssl</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

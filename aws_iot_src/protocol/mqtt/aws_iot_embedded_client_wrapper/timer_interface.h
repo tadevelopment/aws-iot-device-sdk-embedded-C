@@ -30,7 +30,7 @@
 // Add the platform specific timer includes to define the Timer struct
 
 #ifdef _WIN32
-#include "timer_windows.h"
+#include "platform_windows/common/timer_windows.h"
 #else
 #include "timer_linux.h"
 #endif
