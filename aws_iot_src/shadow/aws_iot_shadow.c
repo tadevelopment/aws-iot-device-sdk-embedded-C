@@ -48,8 +48,6 @@ void aws_iot_shadow_disable_discard_old_delta_msgs(void) {
 
 IoT_Error_t aws_iot_shadow_init(MQTTClient_t *pClient) {
 
-	IoT_Error_t rc = NONE_ERROR;
-
 	if (pClient == NULL) {
 		return NULL_VALUE_ERROR;
 	}
