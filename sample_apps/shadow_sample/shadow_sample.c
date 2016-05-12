@@ -112,7 +112,7 @@ void windowActuate_Callback(const char *pJsonString, uint32_t JsonStringDataLen,
 	}
 }
 
-char certDirectory[PATH_MAX + 1] = "../certs";
+char certDirectory[PATH_MAX + 1] = "../../../AWS_SampleApps/certs";
 char HostAddress[255] = AWS_IOT_MQTT_HOST;
 uint16_t port = AWS_IOT_MQTT_PORT;
 uint8_t numPubs = 5;
