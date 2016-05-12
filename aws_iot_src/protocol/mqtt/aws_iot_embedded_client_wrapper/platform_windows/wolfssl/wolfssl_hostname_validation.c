@@ -20,7 +20,7 @@
  *
  */
 
-
+#include <stdint.h>
 #include <user_settings.h>
 #include <openssl/ssl.h>
 #include <wolfcrypt/asn.h>
@@ -44,10 +44,10 @@ static HostnameValidationResult matches_common_name(const char *hostname, const 
 	X509_NAME_ENTRY *common_name_entry = NULL;
 
 	char common_name_str[ASN_NAME_MAX];
-	int common_name_len = -1;
+	uint16_t common_name_len = ASN_NAME_MAX; // Init to max val, this will throw comp warning if its possible to overflow
 
 	// Find the CN field text in the Subject field of the certificate
-	common_name_len = wolfSSL_X509_NAME_get_text_by_NID(
+	common_name_len = (uint8_t)wolfSSL_X509_NAME_get_text_by_NID(
 			X509_get_subject_name( (X509 *)server_cert ), ASN_COMMON_NAME, common_name_str, ASN_NAME_MAX );
 
 	//// Find the position of the CN field in the Subject field of the certificate

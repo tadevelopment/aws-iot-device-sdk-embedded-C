@@ -79,7 +79,7 @@ const MQTTwillOptions MQTTwillOptionsDefault={
 void pahoMessageCallback(MessageData* md) {
 	MQTTMessage* message = md->message;
 	MQTTCallbackParams params;
-
+	
 	// early exit if we do not have a valid callback pointer
 	if (md->applicationHandler == NULL) {
 		return;
@@ -215,7 +215,7 @@ IoT_Error_t aws_iot_mqtt_unsubscribe(char *pTopic) {
 	return rc;
 }
 
-IoT_Error_t aws_iot_mqtt_disconnect() {
+IoT_Error_t aws_iot_mqtt_disconnect(void) {
 	IoT_Error_t rc = NONE_ERROR;
 
 	if(0 != MQTTDisconnect(&c)){

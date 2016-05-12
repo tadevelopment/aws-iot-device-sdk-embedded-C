@@ -165,7 +165,7 @@ static bool isAckForMyThingName(const char *pTopicName) {
 
 static int AckStatusCallback(MQTTCallbackParams params) {
 	int32_t tokenCount;
-	int32_t i;
+	uint8_t i;
 	void *pJsonHandler = NULL;
 	char temporaryClientToken[MAX_SIZE_CLIENT_ID_WITH_SEQUENCE];
 

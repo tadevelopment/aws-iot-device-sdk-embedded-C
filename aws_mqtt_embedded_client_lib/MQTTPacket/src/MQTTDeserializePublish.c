@@ -65,9 +65,9 @@ MQTTReturnCode MQTTDeserialize_publish(unsigned char *dup, QoS *qos,
 		return FAILURE;
 	}
 
-	*dup = header.bits.dup;
+	*dup = (unsigned char)header.bits.dup;
 	*qos = (QoS)header.bits.qos;
-	*retained = header.bits.retain;
+	*retained = (unsigned char)header.bits.retain;
 
 	/* read remaining length */
 	rc = MQTTPacket_decodeBuf(curdata, &decodedLen, &readBytesLen);
@@ -126,8 +126,8 @@ MQTTReturnCode MQTTDeserialize_ack(unsigned char *packettype, unsigned char *dup
 	}
 
 	header.byte = readChar(&curdata);
-	*dup = header.bits.dup;
-	*packettype = header.bits.type;
+	*dup = (unsigned char)header.bits.dup;
+	*packettype = (unsigned char)header.bits.type;
 
 	/* read remaining length */
 	rc = MQTTPacket_decodeBuf(curdata, &decodedLen, &readBytesLen);

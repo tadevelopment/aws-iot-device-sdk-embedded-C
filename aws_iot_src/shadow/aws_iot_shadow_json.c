@@ -402,7 +402,6 @@ bool isReceivedJsonValid(const char *pJsonDocument) {
 }
 
 bool extractClientToken(const char *pJsonDocument, char *pExtractedClientToken) {
-	bool ret_val = false;
 	jsmn_init(&shadowJsonParser);
 	int32_t tokenCount, i;
 	jsmntok_t ClientJsonToken;
@@ -423,7 +422,7 @@ bool extractClientToken(const char *pJsonDocument, char *pExtractedClientToken) 
 	for (i = 1; i < tokenCount; i++) {
 		if (jsoneq(pJsonDocument, &jsonTokenStruct[i], SHADOW_CLIENT_TOKEN_STRING) == 0) {
 			ClientJsonToken = jsonTokenStruct[i + 1];
-			uint8_t length = ClientJsonToken.end - ClientJsonToken.start;
+			int length = ClientJsonToken.end - ClientJsonToken.start;
 			strncpy(pExtractedClientToken, pJsonDocument + ClientJsonToken.start, length);
 			pExtractedClientToken[length] = '\0';
 			return true;
@@ -442,7 +441,6 @@ bool extractVersionNumber(const char *pJsonDocument, void *pJsonHandler, int32_t
 	for (i = 1; i < tokenCount; i++) {
 		if (jsoneq(pJsonDocument, &(jsonTokenStruct[i]), SHADOW_VERSION_STRING) == 0) {
 			jsmntok_t dataToken = jsonTokenStruct[i + 1];
-			uint32_t dataLength = dataToken.end - dataToken.start;
 			ret_val = parseUnsignedInteger32Value(pVersionNumber, pJsonDocument, &dataToken);
 			if (ret_val == NONE_ERROR) {
 				return true;

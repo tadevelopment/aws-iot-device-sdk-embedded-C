@@ -114,7 +114,7 @@ void windowActuate_Callback(const char *pJsonString, uint32_t JsonStringDataLen,
 
 char certDirectory[PATH_MAX + 1] = "../certs";
 char HostAddress[255] = AWS_IOT_MQTT_HOST;
-uint32_t port = AWS_IOT_MQTT_PORT;
+uint16_t port = AWS_IOT_MQTT_PORT;
 uint8_t numPubs = 5;
 
 void parseInputArgsForConnectParams(int argc, char** argv) {
@@ -127,7 +127,7 @@ void parseInputArgsForConnectParams(int argc, char** argv) {
 			DEBUG("Host %s", optarg);
 			break;
 		case 'p':
-			port = atoi(optarg);
+			port = (uint16_t)atoi(optarg);
 			DEBUG("arg %s", optarg);
 			break;
 		case 'c':
@@ -165,7 +165,6 @@ int main(int argc, char** argv) {
 
 	char JsonDocumentBuffer[MAX_LENGTH_OF_UPDATE_JSON_BUFFER];
 	size_t sizeOfJsonDocumentBuffer = sizeof(JsonDocumentBuffer) / sizeof(JsonDocumentBuffer[0]);
-	char *pJsonStringToUpdate;
 	float temperature = 0.0;
 
 	bool windowOpen = false;

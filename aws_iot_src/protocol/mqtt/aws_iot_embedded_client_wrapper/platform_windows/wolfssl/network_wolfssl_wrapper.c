@@ -13,12 +13,6 @@
  * permissions and limitations under the License.
  */
 
-
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-
-#include <wolfssl/ssl.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
@@ -31,6 +25,7 @@
 
 #pragma comment(lib, "Ws2_32.lib")
 
+#include <wolfssl/ssl.h>
 #include "aws_iot_error.h"
 #include "aws_iot_log.h"
 #include "network_interface.h"
@@ -116,7 +111,6 @@ int tls_server_certificate_verify(int preverify_ok, WOLFSSL_X509_STORE_CTX *pX50
 int iot_tls_connect(Network *pNetwork, TLSConnectParams params) {
 
 	IoT_Error_t ret_val = NONE_ERROR;
-	int connect_status = 0;
 
 	if (Create_TCPSocket( &params ) != 0) {
 		ret_val = TCP_SETUP_ERROR;
@@ -205,11 +199,8 @@ int iot_tls_destroy(Network *pNetwork) {
 }
 
 int Create_TCPSocket( const TLSConnectParams* params) {
-
 	int iResult = -1;
-	struct addrinfo *result = NULL,
-		*ptr = NULL,
-		hints;
+	struct addrinfo hints;
 
 	ZeroMemory( &hints, sizeof( hints ) );
 	hints.ai_family = AF_UNSPEC;
@@ -292,7 +283,10 @@ IoT_Error_t ConnectOrTimeoutOrExitOnError(WOLFSSL *pSSL, int timeout_ms){
 	int rc = 0;
 	fd_set readFds;
 	fd_set writeFds;
-	struct timeval timeout = { timeout_ms / 1000, (timeout_ms % 1000) * 1000 };
+	struct timeval timeout;
+	timeout.tv_sec = timeout_ms / 1000;
+	timeout.tv_usec = (timeout_ms % 1000) * 1000;
+
 	int errorCode = 0;
 	int select_retCode = SELECT_TIMEOUT;
 
@@ -356,7 +350,9 @@ IoT_Error_t WriteOrTimeoutOrExitOnError(WOLFSSL *pSSL, unsigned char *msg, int t
 	int writtenLength = 0;
 	int rc = 0;
 	int returnCode = 0;
-	struct timeval timeout = { timeout_ms / 1000, (timeout_ms % 1000) * 1000 };
+	struct timeval timeout;
+	timeout.tv_sec = timeout_ms / 1000;
+	timeout.tv_usec = (timeout_ms % 1000) * 1000;
 
 	do{
 		rc = wolfSSL_write(pSSL, msg, totalLen);
@@ -409,7 +405,9 @@ IoT_Error_t ReadOrTimeoutOrExitOnError(WOLFSSL *pSSL, unsigned char *msg, int to
 	int readLength = 0;
 	int rc = 0;
 	int returnCode = 0;
-	struct timeval timeout = { timeout_ms / 1000, (timeout_ms % 1000) * 1000 };
+	struct timeval timeout;
+	timeout.tv_sec = timeout_ms / 1000;
+	timeout.tv_usec = (timeout_ms % 1000) * 1000;
 
 	do{
 		rc = wolfSSL_read(pSSL, msg, totalLen);

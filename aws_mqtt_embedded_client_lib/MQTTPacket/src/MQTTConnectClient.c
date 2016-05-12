@@ -192,7 +192,7 @@ MQTTReturnCode MQTTDeserialize_connack(unsigned char *sessionPresent,
 	}
 
 	flags.all = readChar(&curdata);
-	*sessionPresent = flags.bits.sessionpresent;
+	*sessionPresent = (unsigned char)flags.bits.sessionpresent;
 	
 	connack_rc_char = readChar(&curdata);
 	switch(connack_rc_char) {

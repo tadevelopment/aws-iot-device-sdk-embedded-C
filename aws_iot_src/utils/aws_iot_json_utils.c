@@ -173,7 +173,7 @@ IoT_Error_t parseBooleanValue(bool *b, const char *jsonString, jsmntok_t *token)
 }
 
 IoT_Error_t parseStringValue(char *buf, const char *jsonString, jsmntok_t *token) {
-	uint16_t size = 0;
+	int size = 0;
 	if (token->type != JSMN_STRING) {
 		WARN("Token was not a string.");
 		return JSON_PARSE_ERROR;
