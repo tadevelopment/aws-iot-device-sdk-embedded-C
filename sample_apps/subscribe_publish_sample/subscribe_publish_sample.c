@@ -88,7 +88,7 @@ char HostAddress[255] = AWS_IOT_MQTT_HOST;
 /**
  * @brief Default MQTT port is pulled from the aws_iot_config.h
  */
-uint32_t port = AWS_IOT_MQTT_PORT;
+uint16_t port = AWS_IOT_MQTT_PORT;
 
 /**
  * @brief This parameter will avoid infinite loop of publish and exit the program after certain number of publishes
@@ -105,7 +105,7 @@ void parseInputArgsForConnectParams(int argc, char** argv) {
 			DEBUG("Host %s", optarg);
 			break;
 		case 'p':
-			port = atoi(optarg);
+			port = (uint16_t)atoi(optarg);
 			DEBUG("arg %s", optarg);
 			break;
 		case 'c':

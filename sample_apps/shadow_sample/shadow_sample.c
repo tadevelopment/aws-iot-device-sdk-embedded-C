@@ -31,10 +31,6 @@
 #include <sys/time.h>
 #include <unistd.h>
 #else
-#define PATH_MAX 512
-#define NOGDI
-#define WIN32_LEAN_AND_MEAN
-#define VC_EXTRALEAN
 
 #include <tchar.h>
 #include <direct.h>
@@ -139,7 +135,7 @@ void parseInputArgsForConnectParams(int argc, char** argv) {
 			DEBUG("cert root directory %s", optarg);
 			break;
 		case 'n':
-			numPubs = atoi(optarg);
+			numPubs = (UINT8)atoi(optarg);
 			DEBUG("num pubs %s", optarg);
 			break;
 		case '?':
@@ -163,7 +159,6 @@ void parseInputArgsForConnectParams(int argc, char** argv) {
 
 int main(int argc, char** argv) {
 	IoT_Error_t rc = NONE_ERROR;
-	int32_t i = 0;
 
 	MQTTClient_t mqttClient;
 	aws_iot_mqtt_init(&mqttClient);

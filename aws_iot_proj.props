@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup Label="UserMacros">
+        <!-- store the path to MaxSrcUtils folder, so we can reference our build tools -->
+        <AWS_IoT_DIR>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))</AWS_IoT_DIR>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Configuration">
+        <ConfigurationType>Application</ConfigurationType>
+        <UseDebugLibraries>true</UseDebugLibraries>
+        <PlatformToolset>v140</PlatformToolset>
+        <UseOfMfc>false</UseOfMfc>
+        <UseOfAtl>false</UseOfAtl>
+        <CharacterSet>MultiByte</CharacterSet>
+        <WholeProgramOptimization>false</WholeProgramOptimization>
+        <LinkIncremental>true</LinkIncremental>
+        <OutDir>$(ProjectDir)\build\$(Configuration)\</OutDir>
+    </PropertyGroup>
+    <ItemDefinitionGroup>
+        <ClCompile>
+            <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+            <WarningLevel>Level4</WarningLevel>
+            <PreprocessorDefinitions>WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;VC_EXTRALEAN;NOGDI;PATH_MAX=512;IOT_DEBUG;IOT_INFO;IOT_WARN;IOT_ERROR;WOLFSSL_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+            <SDLCheck>true</SDLCheck>
+            <AdditionalIncludeDirectories>$(AWS_IoT_DIR)\aws_iot_src\protocol\mqtt;$(AWS_IoT_DIR)\aws_iot_src\utils;$(AWS_IoT_DIR)\aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows;$(AWS_IoT_DIR)\aws_iot_src\shadow</AdditionalIncludeDirectories>
+        </ClCompile>
+
+        <ClCompile Condition="'$(Configuration)'=='Debug'">
+            <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+        </ClCompile>
+        <Link>
+            <SubSystem>Console</SubSystem>
+            <TargetMachine>MachineX86</TargetMachine>
+            <GenerateDebugInformation>true</GenerateDebugInformation>
+            <AdditionalLibraryDirectories>$(AWS_IoT_DIR)build\$(Configuration)\;$(AWS_IoT_DIR)..\wolfssl\$(Configuration)\</AdditionalLibraryDirectories>
+            <AdditionalDependencies>aws_iot_sdk.lib;wolfssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+        </Link>
+    </ItemDefinitionGroup>
+</Project>

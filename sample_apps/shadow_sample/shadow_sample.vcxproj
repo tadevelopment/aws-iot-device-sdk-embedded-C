@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{28246889-053A-4A2F-BDC7-FDA9BA4CAE13}</ProjectGuid>
+    <ProjectGuid>{FA8246A0-D955-4693-B181-01F0BD7FEFCB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>subscribe_publish</RootNamespace>
+    <RootNamespace>shadow_sample</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -31,7 +31,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="subscribe_publish_sample.c" />
+    <ClCompile Include="shadow_sample.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="aws_iot_config.h" />
