@@ -23,7 +23,7 @@
             <DisableSpecificWarnings>4100</DisableSpecificWarnings>
             <PreprocessorDefinitions>WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;VC_EXTRALEAN;NOGDI;PATH_MAX=512;IOT_DEBUG;IOT_INFO;IOT_WARN;IOT_ERROR;WOLFSSL_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
             <SDLCheck>true</SDLCheck>
-            <AdditionalIncludeDirectories>$(AWS_IoT_DIR)\aws_iot_src\protocol\mqtt;$(AWS_IoT_DIR)\aws_iot_src\utils;$(AWS_IoT_DIR)\aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows;$(AWS_IoT_DIR)\aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\;$(AWS_IoT_DIR)\aws_iot_src\shadow</AdditionalIncludeDirectories>
+            <AdditionalIncludeDirectories>$(AWS_IoT_DIR)\aws_iot_src\protocol\mqtt;$(AWS_IoT_DIR)\aws_iot_src\utils;$(AWS_IoT_DIR)\aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows;$(AWS_IoT_DIR)\aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\common;$(AWS_IoT_DIR)\aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\;$(AWS_IoT_DIR)\aws_iot_src\shadow</AdditionalIncludeDirectories>
         </ClCompile>
 
         <ClCompile Condition="'$(Configuration)'=='Debug'">

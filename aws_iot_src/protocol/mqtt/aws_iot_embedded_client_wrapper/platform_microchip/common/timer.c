@@ -19,29 +19,38 @@
  */
 
 #include <stddef.h>
-#include <windows.h>
+#include <sys/types.h>
 
-
-#include "timer.h"
+#include "timer_linux.h"
 
 char expired(Timer* timer) {
-	DWORD curr_time = GetTickCount();
-	return curr_time > timer->timeout_time;
+	struct timeval now, res;
+	gettimeofday(&now, NULL);
+	timersub(&timer->end_time, &now, &res);
+	return res.tv_sec < 0 || (res.tv_sec == 0 && res.tv_usec <= 0);
 }
 
 void countdown_ms(Timer* timer, unsigned int timeout) {
-	timer->timeout_time = GetTickCount() + timeout;
+	struct timeval now;
+	gettimeofday(&now, NULL);
+	struct timeval interval = { timeout / 1000, (timeout % 1000) * 1000 };
+	timeradd(&now, &interval, &timer->end_time);
 }
 
 void countdown(Timer* timer, unsigned int timeout) {
-	timer->timeout_time = GetTickCount() + timeout * 1000;
+	struct timeval now;
+	gettimeofday(&now, NULL);
+	struct timeval interval = { timeout, 0 };
+	timeradd(&now, &interval, &timer->end_time);
 }
 
 int left_ms(Timer* timer) {
-	int elapsed = timer->timeout_time - GetTickCount();
-	return max( elapsed, 0 );
+	struct timeval now, res;
+	gettimeofday(&now, NULL);
+	timersub(&timer->end_time, &now, &res);
+	return (res.tv_sec < 0) ? 0 : res.tv_sec * 1000 + res.tv_usec / 1000;
 }
 
 void InitTimer(Timer* timer) {
-	timer->timeout_time = 0;
+	timer->end_time = (struct timeval ) { 0, 0 };
 }

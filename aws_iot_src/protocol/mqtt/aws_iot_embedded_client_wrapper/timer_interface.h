@@ -27,13 +27,9 @@
 #ifndef __TIMER_INTERFACE_H_
 #define __TIMER_INTERFACE_H_
 
-// Add the platform specific timer includes to define the Timer struct
-
-#ifdef _WIN32
-#include "platform_windows/common/timer_windows.h"
-#else
-#include "timer_linux.h"
-#endif
+// Include a platform-specific timer definition file
+// Which timer is selected is defined by your include paths
+#include <timer.h>
 
 /**
  * @brief Timer Type
