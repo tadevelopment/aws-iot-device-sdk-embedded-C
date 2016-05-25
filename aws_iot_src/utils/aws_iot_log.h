@@ -121,7 +121,7 @@
     printf("\n"); \
     }
 #else
-#define DEBUG(...)
+#define DEBUG()
 #endif
 
 /**
@@ -136,7 +136,7 @@
     printf("\n"); \
     }
 #else
-#define INFO(...)
+#define INFO()
 #endif
 
 /**
@@ -152,7 +152,7 @@
     printf("\n"); \
     }
 #else
-#define WARN(...)
+#define WARN()
 #endif
 
 /**
@@ -168,7 +168,7 @@
     printf("\n"); \
     }
 #else
-#define ERROR(...)
+#define ERROR()
 #endif
 
 #endif // _WIN32

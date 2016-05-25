@@ -25,7 +25,9 @@ static iot_disconnect_handler clientDisconnectHandler;
 static unsigned char writebuf[AWS_IOT_MQTT_TX_BUF_LEN];
 static unsigned char readbuf[AWS_IOT_MQTT_RX_BUF_LEN];
 
-const MQTTConnectParams MQTTConnectParamsDefault = {
+const MQTTConnectParams MQTTConnectParamsDefault
+#ifndef __XC // In XC, all mem is init'ed to 0 automatically
+ = {
 		.enableAutoReconnect = 0,
 		.pHostURL = AWS_IOT_MQTT_HOST,
 		.port = AWS_IOT_MQTT_PORT,
@@ -44,36 +46,58 @@ const MQTTConnectParams MQTTConnectParamsDefault = {
 		.tlsHandshakeTimeout_ms = 2000,
 		.isSSLHostnameVerify = true,
 		.disconnectHandler = NULL
-};
+}
+#endif // __XC
+;
 
-const MQTTPublishParams MQTTPublishParamsDefault={
+const MQTTPublishParams MQTTPublishParamsDefault
+#ifndef __XC  // In XC, all mem is init'ed to 0 automatically
+={
 		.pTopic = NULL,
 		.MessageParams = {.qos = QOS_0, .isRetained=false, .isDuplicate = false, .id = 0, .pPayload = NULL, .PayloadLen = 0}
-};
-const MQTTSubscribeParams MQTTSubscribeParamsDefault={
+}
+#endif // __XC
+;
+const MQTTSubscribeParams MQTTSubscribeParamsDefault
+#ifndef __XC  // In XC, all mem is init'ed to 0 automatically
+={
 		.pTopic = NULL,
 		.qos = QOS_0,
 		.mHandler = NULL
-};
-const MQTTCallbackParams MQTTCallbackParamsDefault={
+}
+#endif // __XC
+;
+const MQTTCallbackParams MQTTCallbackParamsDefault
+#ifndef __XC  // In XC, all mem is init'ed to 0 automatically
+={
 		.pTopicName = NULL,
 		.TopicNameLen = 0,
 		.MessageParams = {.qos = QOS_0, .isRetained=false, .isDuplicate = false, .id = 0, .pPayload = NULL, .PayloadLen = 0}
-};
-const MQTTMessageParams MQTTMessageParamsDefault={
+}
+#endif // __XC
+;
+const MQTTMessageParams MQTTMessageParamsDefault
+#ifndef __XC  // In XC, all mem is init'ed to 0 automatically
+={
 		.qos = QOS_0,
 		.isRetained=false,
 		.isDuplicate = false,
 		.id = 0,
 		.pPayload = NULL,
 		.PayloadLen = 0
-};
-const MQTTwillOptions MQTTwillOptionsDefault={
+}
+#endif // __XC
+;
+const MQTTwillOptions MQTTwillOptionsDefault
+#ifndef __XC  // In XC, all mem is init'ed to 0 automatically
+={
 		.pTopicName = NULL,
 		.pMessage = NULL,
 		.isRetained = false,
 		.qos = QOS_0
-};
+}
+#endif // __XC
+;
 
 #define GETLOWER4BYTES 0x0FFFFFFFF
 void pahoMessageCallback(MessageData* md) {

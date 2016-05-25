@@ -20,7 +20,9 @@
 #include "aws_iot_shadow_key.h"
 #include "aws_iot_shadow_records.h"
 
-const ShadowParameters_t ShadowParametersDefault = {
+const ShadowParameters_t ShadowParametersDefault
+#ifndef __XC
+    = {
 		.pMyThingName = AWS_IOT_MY_THING_NAME,
 		.pMqttClientId = AWS_IOT_MQTT_CLIENT_ID,
 		.pHost = AWS_IOT_MQTT_HOST,
@@ -28,7 +30,9 @@ const ShadowParameters_t ShadowParametersDefault = {
 		.pRootCA = NULL,
 		.pClientCRT = NULL,
 		.pClientKey = NULL
-};
+}
+#endif // __XC
+;
 
 void aws_iot_shadow_reset_last_received_version(void) {
 	shadowJsonVersionNum = 0;
@@ -69,12 +73,14 @@ IoT_Error_t aws_iot_shadow_connect(MQTTClient_t *pClient, ShadowParameters_t *pP
 		return NULL_VALUE_ERROR;
 	}
 
+#ifndef __XC
 	snprintf(myThingName, MAX_SIZE_OF_THING_NAME, "%s", pParams->pMyThingName );
 	snprintf(mqttClientID, MAX_SIZE_OF_UNIQUE_CLIENT_ID_BYTES, "%s", pParams->pMqttClientId );
 
 	DEBUG("Thing Name %s", myThingName);
 	DEBUG("MQTT Client ID %s", mqttClientID);
-
+#endif
+    
 	ConnectParams.KeepAliveInterval_sec = 10;
 	ConnectParams.MQTTVersion = MQTT_3_1_1;
 	ConnectParams.mqttCommandTimeout_ms = 10000;
