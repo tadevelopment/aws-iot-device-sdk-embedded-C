@@ -22,6 +22,7 @@
 #include "aws_iot_log.h"
 #include "aws_iot_shadow_key.h"
 #include "aws_iot_config.h"
+#include "aws_iot_error.h"
 
 extern char mqttClientID[MAX_SIZE_OF_UNIQUE_CLIENT_ID_BYTES];
 
@@ -49,7 +50,7 @@ void iot_shadow_delete_request_json(char *pJsonDocument) {
 	emptyJsonWithClientToken(pJsonDocument);
 }
 
-static inline IoT_Error_t checkReturnValueOfSnPrintf(int32_t snPrintfReturn, size_t maxSizeOfJsonDocument) {
+static IoT_Error_t checkReturnValueOfSnPrintf(int32_t snPrintfReturn, size_t maxSizeOfJsonDocument) {
 
 	if (snPrintfReturn >= maxSizeOfJsonDocument) {
 		return SHADOW_JSON_BUFFER_TRUNCATED;

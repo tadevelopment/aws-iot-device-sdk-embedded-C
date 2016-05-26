@@ -183,9 +183,9 @@ IoT_Error_t aws_iot_mqtt_connect(MQTTConnectParams *pParams) {
 	setDisconnectHandler(&c, pahoDisconnectHandler);
 	clientDisconnectHandler = pParams->disconnectHandler;
 
-	data.clientID.cstring = pParams->pClientID;
-	data.username.cstring = pParams->pUserName;
-	data.password.cstring = pParams->pPassword;
+	data.clientID.cstring = (char*)pParams->pClientID;
+	//data.username.cstring = (char*)pParams->pUserName;
+	//data.password.cstring = (char*)pParams->pPassword;
 	data.will.topicName.cstring = (char*)pParams->will.pTopicName;
 	data.will.message.cstring = (char*)pParams->will.pMessage;
 	data.will.qos = pParams->will.qos;

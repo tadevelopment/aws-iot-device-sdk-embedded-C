@@ -46,13 +46,13 @@
  *
  */
 typedef struct {
-	char *pMyThingName; ///< Every device has a Thing Shadow and this is the placeholder for name
-	char *pMqttClientId; ///< Currently the Shadow uses MQTT to connect and it is important to ensure we have unique client id
-	char *pHost; ///< This will be unique to a customer and can be retrieved from the console
+	const char *pMyThingName; ///< Every device has a Thing Shadow and this is the placeholder for name
+	const char *pMqttClientId; ///< Currently the Shadow uses MQTT to connect and it is important to ensure we have unique client id
+	const char *pHost; ///< This will be unique to a customer and can be retrieved from the console
 	uint16_t port; ///< By default the port is 8883
-	char *pRootCA; ///< Location with the Filename of the Root CA
-	char *pClientCRT; ///< Location of Device certs signed by AWS IoT service
-	char *pClientKey; ///< Location of Device private key
+	const char *pRootCA; ///< Location with the Filename of the Root CA
+	const char *pClientCRT; ///< Location of Device certs signed by AWS IoT service
+	const char *pClientKey; ///< Location of Device private key
 } ShadowParameters_t;
 
 /*!

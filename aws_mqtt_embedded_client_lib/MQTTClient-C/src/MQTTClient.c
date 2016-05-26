@@ -525,7 +525,6 @@ MQTTReturnCode cycle(Client *c, Timer *timer, uint8_t *packet_type) {
             /* Either unknown packet type or Failure occurred
              * Should not happen */
         	return MQTT_BUFFER_RX_MESSAGE_INVALID;
-            break;
         }
     }
 

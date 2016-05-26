@@ -47,10 +47,10 @@ IoT_Error_t parseUnsignedInteger32Value(uint32_t *i, const char *jsonString, jsm
 		return JSON_PARSE_ERROR;
 	}
 
-	if (1 != sscanf(jsonString + token->start, "%"PRIu32, i)) {
-		WARN("Token was not an integer.");
-		return JSON_PARSE_ERROR;
-	}
+//    if (1 != sscanf(jsonString + token->start, "%"PRIu32, i)) {
+//		WARN("Token was not an integer.");
+//		return JSON_PARSE_ERROR;
+//	}
 
 	return NONE_ERROR;
 }
@@ -61,10 +61,10 @@ IoT_Error_t parseUnsignedInteger16Value(uint16_t *i, const char *jsonString, jsm
 		return JSON_PARSE_ERROR;
 	}
 
-	if (1 != sscanf(jsonString + token->start, "%"PRIu16, i)) {
-		WARN("Token was not an integer.");
-		return JSON_PARSE_ERROR;
-	}
+//	if (1 != sscanf(jsonString + token->start, "%"PRIu16, i)) {
+//		WARN("Token was not an integer.");
+//		return JSON_PARSE_ERROR;
+//	}
 
 	return NONE_ERROR;
 }
@@ -75,10 +75,10 @@ IoT_Error_t parseUnsignedInteger8Value(uint8_t *i, const char *jsonString, jsmnt
 		return JSON_PARSE_ERROR;
 	}
 
-	if (1 != sscanf(jsonString + token->start, "%"PRIu8, i)) {
-		WARN("Token was not an integer.");
-		return JSON_PARSE_ERROR;
-	}
+//	if (1 != sscanf(jsonString + token->start, "%"PRIu8, i)) {
+//		WARN("Token was not an integer.");
+//		return JSON_PARSE_ERROR;
+//	}
 
 	return NONE_ERROR;
 }
@@ -89,10 +89,10 @@ IoT_Error_t parseInteger32Value(int32_t *i, const char *jsonString, jsmntok_t *t
 		return JSON_PARSE_ERROR;
 	}
 
-	if (1 != sscanf(jsonString + token->start, "%"PRIi32, i)) {
-		WARN("Token was not an integer.");
-		return JSON_PARSE_ERROR;
-	}
+//	if (1 != sscanf(jsonString + token->start, "%"PRIi32, i)) {
+//		WARN("Token was not an integer.");
+//		return JSON_PARSE_ERROR;
+//	}
 
 	return NONE_ERROR;
 }
@@ -103,10 +103,10 @@ IoT_Error_t parseInteger16Value(int16_t *i, const char *jsonString, jsmntok_t *t
 		return JSON_PARSE_ERROR;
 	}
 
-	if (1 != sscanf(jsonString + token->start, "%"PRIi16, i)) {
-		WARN("Token was not an integer.");
-		return JSON_PARSE_ERROR;
-	}
+//	if (1 != sscanf(jsonString + token->start, "%"PRIi16, i)) {
+//		WARN("Token was not an integer.");
+//		return JSON_PARSE_ERROR;
+//	}
 
 	return NONE_ERROR;
 }
@@ -117,10 +117,10 @@ IoT_Error_t parseInteger8Value(int8_t *i, const char *jsonString, jsmntok_t *tok
 		return JSON_PARSE_ERROR;
 	}
 
-	if (1 != sscanf(jsonString + token->start, "%"PRIi8, i)) {
-		WARN("Token was not an integer.");
-		return JSON_PARSE_ERROR;
-	}
+//	if (1 != sscanf(jsonString + token->start, "%"PRIi8, i)) {
+//		WARN("Token was not an integer.");
+//		return JSON_PARSE_ERROR;
+//	}
 
 	return NONE_ERROR;
 }
@@ -131,10 +131,10 @@ IoT_Error_t parseFloatValue(float *f, const char *jsonString, jsmntok_t *token) 
 		return JSON_PARSE_ERROR;
 	}
 
-	if (1 != sscanf(jsonString + token->start, "%f", f)) {
-		WARN("Token was not a float.");
-		return JSON_PARSE_ERROR;
-	}
+//	if (1 != sscanf(jsonString + token->start, "%f", f)) {
+//		WARN("Token was not a float.");
+//		return JSON_PARSE_ERROR;
+//	}
 
 	return NONE_ERROR;
 }
@@ -145,10 +145,10 @@ IoT_Error_t parseDoubleValue(double *d, const char *jsonString, jsmntok_t *token
 		return JSON_PARSE_ERROR;
 	}
 
-	if (1 != sscanf(jsonString + token->start, "%lf", d)) {
-		WARN("Token was not a double.");
-		return JSON_PARSE_ERROR;
-	}
+//	if (1 != sscanf(jsonString + token->start, "%lf", d)) {
+//		WARN("Token was not a double.");
+//		return JSON_PARSE_ERROR;
+//	}
 
 	return NONE_ERROR;
 }

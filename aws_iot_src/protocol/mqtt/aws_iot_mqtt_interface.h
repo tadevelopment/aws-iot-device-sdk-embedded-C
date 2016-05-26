@@ -81,14 +81,14 @@ typedef void (*iot_disconnect_handler)(void);
  */
 typedef struct {
 	uint8_t enableAutoReconnect;		///< Set to true to enable auto reconnect
-	char *pHostURL;						///< Pointer to a string defining the endpoint for the MQTT service
+	const char *pHostURL;						///< Pointer to a string defining the endpoint for the MQTT service
 	uint16_t port;						///< MQTT service listening port
-	char *pRootCALocation;				///< Pointer to a string defining the Root CA file (full file, not path)
-	char *pDeviceCertLocation;			///< Pointer to a string defining the device identity certificate file (full file, not path)
-	char *pDevicePrivateKeyLocation;	///< Pointer to a string defining the device private key file (full file, not path)
-	char *pClientID;					///< Pointer to a string defining the MQTT client ID (this needs to be unique \b per \b device across your AWS account)
-	char *pUserName;					///< Not used in the AWS IoT Service
-	char *pPassword;					///< Not used in the AWS IoT Service
+	const char *pRootCALocation;				///< Pointer to a string defining the Root CA file (full file, not path)
+	const char *pDeviceCertLocation;			///< Pointer to a string defining the device identity certificate file (full file, not path)
+	const char *pDevicePrivateKeyLocation;	///< Pointer to a string defining the device private key file (full file, not path)
+	const char *pClientID;					///< Pointer to a string defining the MQTT client ID (this needs to be unique \b per \b device across your AWS account)
+	const char *pUserName;					///< Not used in the AWS IoT Service
+	const char *pPassword;					///< Not used in the AWS IoT Service
 	MQTT_Ver_t MQTTVersion;				///< Desired MQTT version used during connection
 	uint16_t KeepAliveInterval_sec;		///< MQTT keep alive interval in seconds.  Defines inactivity time allowed before determining the connection has been lost.
 	bool isCleansession;				///< MQTT clean session.  True = this session is to be treated as clean.  Previous server state is cleared and no stated is retained from this connection.
@@ -137,7 +137,7 @@ extern const MQTTCallbackParams MQTTCallbackParamsDefault;
  * Supplied upon subscribing to a topic.
  *
  */
-typedef int32_t (*iot_message_handler)(MQTTCallbackParams params);
+typedef int8_t (*iot_message_handler)(MQTTCallbackParams params);
 
 /**
  * @brief MQTT Subscription Parameters

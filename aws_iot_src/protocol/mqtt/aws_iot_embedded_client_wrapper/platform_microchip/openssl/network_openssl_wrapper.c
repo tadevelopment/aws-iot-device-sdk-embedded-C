@@ -18,10 +18,12 @@
 // functions will need to be moved out of this
 // API into the units firmware
 // (CHECK Linux/Windows for sample implementation though)
+#include <network_interface.h>
+#include <aws_iot_error.h>
 
-struct Network Network;
-struct X509_STORE_CTX;
-struct TLSConnectParams TLSConnectParams;
+//typedef X509_STORE_CTX _X509_STORE_CTX;
+//typedef Network _Network;
+//typedef TLSConnectParams _TLSConnectParams;
 
 int iot_tls_init(Network *pNetwork) {
 
@@ -35,10 +37,10 @@ int iot_tls_is_connected(Network *pNetwork) {
 	return 1;
 }
 
-int tls_server_certificate_verify(int preverify_ok, X509_STORE_CTX *pX509CTX){
-    // TODO
-	return 1;
-}
+//int tls_server_certificate_verify(int preverify_ok, X509_STORE_CTX *pX509CTX){
+//    // TODO
+//	return 1;
+//}
 
 int iot_tls_connect(Network *pNetwork, TLSConnectParams params) {
     // TODO

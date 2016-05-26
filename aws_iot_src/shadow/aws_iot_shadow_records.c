@@ -74,8 +74,8 @@ uint32_t shadowJsonVersionNum = 0;
 bool shadowDiscardOldDeltaFlag = true;
 
 // local helper functions
-static int AckStatusCallback(MQTTCallbackParams params);
-static int shadow_delta_callback(MQTTCallbackParams params);
+static int8_t AckStatusCallback(MQTTCallbackParams params);
+static int8_t shadow_delta_callback(MQTTCallbackParams params);
 static void topicNameFromThingAndAction(char *pTopic, const char *pThingName, ShadowActions_t action,
 		ShadowAckTopicTypes_t ackType);
 static int16_t getNextFreeIndexOfSubscriptionList(void);
@@ -97,7 +97,8 @@ IoT_Error_t registerJsonTokenOnDelta(jsonStruct_t *pStruct) {
 	if (!deltaTopicSubscribedFlag) {
 		MQTTSubscribeParams subParams;
 		subParams.mHandler = shadow_delta_callback;
-		snprintf(shadowDeltaTopic,MAX_SHADOW_TOPIC_LENGTH_BYTES, "$aws/things/%s/shadow/update/delta", myThingName);
+        // TODO
+//		snprintf(shadowDeltaTopic,MAX_SHADOW_TOPIC_LENGTH_BYTES, "$aws/things/%s/shadow/update/delta", myThingName);
 		subParams.pTopic = shadowDeltaTopic;
 		subParams.qos = QOS_0;
 		rc = pMqttClient->subscribe(&subParams);
@@ -163,7 +164,7 @@ static bool isAckForMyThingName(const char *pTopicName) {
 	return false;
 }
 
-static int AckStatusCallback(MQTTCallbackParams params) {
+static int8_t AckStatusCallback(MQTTCallbackParams params) {
 	int32_t tokenCount;
 	uint8_t i;
 	void *pJsonHandler = NULL;
@@ -437,7 +438,7 @@ void HandleExpiredResponseCallbacks(void) {
 	}
 }
 
-static int shadow_delta_callback(MQTTCallbackParams params) {
+static int8_t shadow_delta_callback(MQTTCallbackParams params) {
 
 	int32_t tokenCount;
 	uint32_t i = 0;

@@ -33,6 +33,8 @@
 /* Platform specific implementation header files */
 #include "network_interface.h"
 #include "timer_interface.h"
+#include "timer.h"
+
 
 #define MAX_PACKET_ID 65535
 #define MAX_MESSAGE_HANDLERS AWS_IOT_MQTT_NUM_SUBSCRIBE_HANDLERS

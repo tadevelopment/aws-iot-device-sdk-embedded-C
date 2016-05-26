@@ -21,6 +21,7 @@
 #include <stddef.h>
 
 #include "timer.h"
+#include "timer_interface.h"
 
 char expired(Timer* timer) {
     return 0;
