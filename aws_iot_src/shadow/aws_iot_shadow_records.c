@@ -54,8 +54,6 @@ typedef enum {
 
 ToBeReceivedAckRecord_t AckWaitList[MAX_ACKS_TO_COMEIN_AT_ANY_GIVEN_TIME];
 
-MQTTClient_t *pMqttClient;
-
 char myThingName[MAX_SIZE_OF_THING_NAME];
 char mqttClientID[MAX_SIZE_OF_UNIQUE_CLIENT_ID_BYTES];
 
@@ -97,11 +95,10 @@ IoT_Error_t registerJsonTokenOnDelta(jsonStruct_t *pStruct) {
 	if (!deltaTopicSubscribedFlag) {
 		MQTTSubscribeParams subParams;
 		subParams.mHandler = shadow_delta_callback;
-        // TODO
-//		snprintf(shadowDeltaTopic,MAX_SHADOW_TOPIC_LENGTH_BYTES, "$aws/things/%s/shadow/update/delta", myThingName);
+		//snprintf(shadowDeltaTopic,MAX_SHADOW_TOPIC_LENGTH_BYTES, "$aws/things/%s/shadow/update/delta", myThingName);
 		subParams.pTopic = shadowDeltaTopic;
 		subParams.qos = QOS_0;
-		rc = pMqttClient->subscribe(&subParams);
+		rc = aws_iot_mqtt_subscribe(&subParams);
 		DEBUG("delta topic %s", shadowDeltaTopic);
 		deltaTopicSubscribedFlag = true;
 	}
@@ -165,55 +162,55 @@ static bool isAckForMyThingName(const char *pTopicName) {
 }
 
 static int8_t AckStatusCallback(MQTTCallbackParams params) {
-	int32_t tokenCount;
-	uint8_t i;
-	void *pJsonHandler = NULL;
-	char temporaryClientToken[MAX_SIZE_CLIENT_ID_WITH_SEQUENCE];
+	//int32_t tokenCount;
+	//uint8_t i;
+	//void *pJsonHandler = NULL;
+	//char temporaryClientToken[MAX_SIZE_CLIENT_ID_WITH_SEQUENCE];
 
-	if (params.MessageParams.PayloadLen > SHADOW_MAX_SIZE_OF_RX_BUFFER) {
-		return GENERIC_ERROR;
-	}
+	//if (params.MessageParams.PayloadLen > SHADOW_MAX_SIZE_OF_RX_BUFFER) {
+	//	return GENERIC_ERROR;
+	//}
 
-	memcpy(shadowRxBuf, params.MessageParams.pPayload, params.MessageParams.PayloadLen);
-	shadowRxBuf[params.MessageParams.PayloadLen] = '\0';	// jsmn_parse relies on a string
+	//memcpy(shadowRxBuf, params.MessageParams.pPayload, params.MessageParams.PayloadLen);
+	//shadowRxBuf[params.MessageParams.PayloadLen] = '\0';	// jsmn_parse relies on a string
 
-	if (!isJsonValidAndParse(shadowRxBuf, pJsonHandler, &tokenCount)) {
-		WARN("Received JSON is not valid");
-		return GENERIC_ERROR;
-	}
+	//if (!isJsonValidAndParse(shadowRxBuf, pJsonHandler, &tokenCount)) {
+	//	WARN("Received JSON is not valid");
+	//	return GENERIC_ERROR;
+	//}
 
-	if (isAckForMyThingName(params.pTopicName)) {
-		uint32_t tempVersionNumber = 0;
-		if (extractVersionNumber(shadowRxBuf, pJsonHandler, tokenCount, &tempVersionNumber)) {
-			if (tempVersionNumber > shadowJsonVersionNum) {
-				shadowJsonVersionNum = tempVersionNumber;
-			}
-		}
-	}
+	//if (isAckForMyThingName(params.pTopicName)) {
+	//	uint32_t tempVersionNumber = 0;
+	//	if (extractVersionNumber(shadowRxBuf, pJsonHandler, tokenCount, &tempVersionNumber)) {
+	//		if (tempVersionNumber > shadowJsonVersionNum) {
+	//			shadowJsonVersionNum = tempVersionNumber;
+	//		}
+	//	}
+	//}
 
-	if (extractClientToken(shadowRxBuf, temporaryClientToken)) {
-		for (i = 0; i < MAX_ACKS_TO_COMEIN_AT_ANY_GIVEN_TIME; i++) {
-			if (!AckWaitList[i].isFree) {
-				if (strcmp(AckWaitList[i].clientTokenID, temporaryClientToken) == 0) {
-					Shadow_Ack_Status_t status;
-					if (strstr(params.pTopicName, "accepted") != NULL) {
-						status = SHADOW_ACK_ACCEPTED;
-					} else if (strstr(params.pTopicName, "rejected") != NULL) {
-						status = SHADOW_ACK_REJECTED;
-					}
-					if (status == SHADOW_ACK_ACCEPTED || status == SHADOW_ACK_REJECTED) {
-						if (AckWaitList[i].callback != NULL) {
-							AckWaitList[i].callback(AckWaitList[i].thingName, AckWaitList[i].action, status,
-									shadowRxBuf, AckWaitList[i].pCallbackContext);
-						}
-						unsubscribeFromAcceptedAndRejected(i);
-						AckWaitList[i].isFree = true;
-						return NONE_ERROR;
-					}
-				}
-			}
-		}
-	}
+	//if (extractClientToken(shadowRxBuf, temporaryClientToken)) {
+	//	for (i = 0; i < MAX_ACKS_TO_COMEIN_AT_ANY_GIVEN_TIME; i++) {
+	//		if (!AckWaitList[i].isFree) {
+	//			if (strcmp(AckWaitList[i].clientTokenID, temporaryClientToken) == 0) {
+	//				Shadow_Ack_Status_t status;
+	//				if (strstr(params.pTopicName, "accepted") != NULL) {
+	//					status = SHADOW_ACK_ACCEPTED;
+	//				} else if (strstr(params.pTopicName, "rejected") != NULL) {
+	//					status = SHADOW_ACK_REJECTED;
+	//				}
+	//				if (status == SHADOW_ACK_ACCEPTED || status == SHADOW_ACK_REJECTED) {
+	//					if (AckWaitList[i].callback != NULL) {
+	//						AckWaitList[i].callback(AckWaitList[i].thingName, AckWaitList[i].action, status,
+	//								shadowRxBuf, AckWaitList[i].pCallbackContext);
+	//					}
+	//					unsubscribeFromAcceptedAndRejected(i);
+	//					AckWaitList[i].isFree = true;
+	//					return NONE_ERROR;
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 
 	return GENERIC_ERROR;
 }
@@ -246,7 +243,7 @@ static void unsubscribeFromAcceptedAndRejected(uint8_t index) {
 	indexSubList = findIndexOfSubscriptionList(TemporaryTopicNameAccepted);
 	if ((indexSubList >= 0)) {
 		if (!SubscriptionList[indexSubList].isSticky && (SubscriptionList[indexSubList].count == 1)) {
-			ret_val = pMqttClient->unsubscribe(TemporaryTopicNameAccepted);
+			ret_val = aws_iot_mqtt_unsubscribe(TemporaryTopicNameAccepted);
 			if (ret_val == NONE_ERROR) {
 				SubscriptionList[indexSubList].isFree = true;
 			}
@@ -258,7 +255,7 @@ static void unsubscribeFromAcceptedAndRejected(uint8_t index) {
 	indexSubList = findIndexOfSubscriptionList(TemporaryTopicNameRejected);
 	if ((indexSubList >= 0)) {
 		if (!SubscriptionList[indexSubList].isSticky && (SubscriptionList[indexSubList].count == 1)) {
-			ret_val = pMqttClient->unsubscribe(TemporaryTopicNameRejected);
+			ret_val = aws_iot_mqtt_unsubscribe(TemporaryTopicNameRejected);
 			if (ret_val == NONE_ERROR) {
 				SubscriptionList[indexSubList].isFree = true;
 			}
@@ -268,7 +265,8 @@ static void unsubscribeFromAcceptedAndRejected(uint8_t index) {
 	}
 }
 
-void initializeRecords(MQTTClient_t *pClient) {
+void initializeRecords()
+{
 	uint8_t i;
 	for (i = 0; i < MAX_ACKS_TO_COMEIN_AT_ANY_GIVEN_TIME; i++) {
 		AckWaitList[i].isFree = true;
@@ -278,7 +276,6 @@ void initializeRecords(MQTTClient_t *pClient) {
 		SubscriptionList[i].count = 0;
 		SubscriptionList[i].isSticky = false;
 	}
-	pMqttClient = pClient;
 }
 
 bool isSubscriptionPresent(const char *pThingName, ShadowActions_t action) {
@@ -324,14 +321,14 @@ IoT_Error_t subscribeToShadowActionAcks(const char *pThingName, ShadowActions_t 
 		subParams.mHandler = AckStatusCallback;
 		subParams.qos = QOS_0;
 		subParams.pTopic = SubscriptionList[indexAcceptedSubList].Topic;
-		ret_val = pMqttClient->subscribe(&subParams);
+		ret_val = aws_iot_mqtt_subscribe(&subParams);
 		if (ret_val == NONE_ERROR) {
 			SubscriptionList[indexAcceptedSubList].count = 1;
 			SubscriptionList[indexAcceptedSubList].isSticky = isSticky;
 			topicNameFromThingAndAction(SubscriptionList[indexRejectedSubList].Topic, pThingName, action,
 					SHADOW_REJECTED);
 			subParams.pTopic = SubscriptionList[indexRejectedSubList].Topic;
-			ret_val = pMqttClient->subscribe(&subParams);
+			ret_val = aws_iot_mqtt_subscribe(&subParams);
 			if (ret_val == NONE_ERROR) {
 				SubscriptionList[indexRejectedSubList].count = 1;
 				SubscriptionList[indexRejectedSubList].isSticky = isSticky;
@@ -354,7 +351,7 @@ IoT_Error_t subscribeToShadowActionAcks(const char *pThingName, ShadowActions_t 
 			SubscriptionList[indexRejectedSubList].isFree = true;
 		}
 		if (SubscriptionList[indexAcceptedSubList].count == 1) {
-			pMqttClient->unsubscribe(SubscriptionList[indexAcceptedSubList].Topic);
+			aws_iot_mqtt_unsubscribe(SubscriptionList[indexAcceptedSubList].Topic);
 		}
 	}
 
@@ -391,7 +388,7 @@ IoT_Error_t publishToShadowAction(const char * pThingName, ShadowActions_t actio
 	msgParams.PayloadLen = strlen(pJsonDocumentToBeSent) + 1;
 	msgParams.pPayload = (char *) pJsonDocumentToBeSent;
 	pubParams.MessageParams = msgParams;
-	ret_val = pMqttClient->publish(&pubParams);
+	ret_val = aws_iot_mqtt_publish(&pubParams);
 
 	return ret_val;
 }

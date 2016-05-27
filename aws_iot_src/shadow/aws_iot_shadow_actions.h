@@ -18,7 +18,7 @@
 
 #include "aws_iot_shadow_interface.h"
 
-IoT_Error_t iot_shadow_action(MQTTClient_t *pClient, const char *pThingName, ShadowActions_t action,
+IoT_Error_t iot_shadow_action(const char *pThingName, ShadowActions_t action,
 		const char *pJsonDocumentToBeSent, fpActionCallback_t callback, void *pCallbackContext,
 		uint32_t timeout_seconds, bool isSticky);
 

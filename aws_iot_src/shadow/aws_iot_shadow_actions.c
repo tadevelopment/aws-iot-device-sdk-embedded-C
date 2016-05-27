@@ -20,7 +20,7 @@
 #include "aws_iot_shadow_records.h"
 #include "aws_iot_config.h"
 
-IoT_Error_t iot_shadow_action(MQTTClient_t *pClient, const char *pThingName, ShadowActions_t action,
+IoT_Error_t iot_shadow_action(const char *pThingName, ShadowActions_t action,
 		const char *pJsonDocumentToBeSent, fpActionCallback_t callback, void *pCallbackContext,
 		uint32_t timeout_seconds, bool isSticky) {
 
@@ -30,7 +30,7 @@ IoT_Error_t iot_shadow_action(MQTTClient_t *pClient, const char *pThingName, Sha
 	bool isAckWaitListFree = false;
 	uint8_t indexAckWaitList;
 
-	if(pClient == NULL || pThingName == NULL || pJsonDocumentToBeSent == NULL){
+	if(pThingName == NULL || pJsonDocumentToBeSent == NULL){
 		return NULL_VALUE_ERROR;
 	}
 

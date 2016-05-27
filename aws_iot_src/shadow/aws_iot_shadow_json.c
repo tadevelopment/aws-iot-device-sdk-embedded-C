@@ -68,7 +68,7 @@ IoT_Error_t aws_iot_shadow_init_json_document(char *pJsonDocument, size_t maxSiz
 	if (pJsonDocument == NULL) {
 		return NULL_VALUE_ERROR;
 	}
-	snPrintfReturn = snprintf(pJsonDocument, maxSizeOfJsonDocument, "{\"state\":{");
+	//snPrintfReturn = snprintf(pJsonDocument, maxSizeOfJsonDocument, "{\"state\":{");
 
 	ret_val = checkReturnValueOfSnPrintf(snPrintfReturn, maxSizeOfJsonDocument);
 
@@ -96,7 +96,7 @@ IoT_Error_t aws_iot_shadow_add_desired(char *pJsonDocument, size_t maxSizeOfJson
 		}
 		remSizeOfJsonBuffer = tempSize;
 
-	snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument), remSizeOfJsonBuffer, "\"desired\":{");
+	//snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument), remSizeOfJsonBuffer, "\"desired\":{");
 	ret_val = checkReturnValueOfSnPrintf(snPrintfReturn, remSizeOfJsonBuffer);
 
 	if (ret_val != NONE_ERROR) {
@@ -111,8 +111,8 @@ IoT_Error_t aws_iot_shadow_add_desired(char *pJsonDocument, size_t maxSizeOfJson
 			remSizeOfJsonBuffer = tempSize;
 		pTemporary = va_arg (pArgs, jsonStruct_t *);
 		if (pTemporary != NULL) {
-			snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument), remSizeOfJsonBuffer, "\"%s\":",
-					pTemporary->pKey);
+			//snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument), remSizeOfJsonBuffer, "\"%s\":",
+			//		pTemporary->pKey);
 			ret_val = checkReturnValueOfSnPrintf(snPrintfReturn, remSizeOfJsonBuffer);
 			if (ret_val != NONE_ERROR) {
 				return ret_val;
@@ -132,7 +132,7 @@ IoT_Error_t aws_iot_shadow_add_desired(char *pJsonDocument, size_t maxSizeOfJson
 	}
 
 	va_end(pArgs);
-	snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument) - 1, remSizeOfJsonBuffer, "},");
+	//snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument) - 1, remSizeOfJsonBuffer, "},");
 	ret_val = checkReturnValueOfSnPrintf(snPrintfReturn, remSizeOfJsonBuffer);
 	return ret_val;
 }
@@ -159,7 +159,7 @@ IoT_Error_t aws_iot_shadow_add_reported(char *pJsonDocument, size_t maxSizeOfJso
 	}
 	remSizeOfJsonBuffer = tempSize;
 
-	snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument), remSizeOfJsonBuffer, "\"reported\":{");
+	//snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument), remSizeOfJsonBuffer, "\"reported\":{");
 	ret_val = checkReturnValueOfSnPrintf(snPrintfReturn, remSizeOfJsonBuffer);
 
 	if (ret_val != NONE_ERROR) {
@@ -175,8 +175,8 @@ IoT_Error_t aws_iot_shadow_add_reported(char *pJsonDocument, size_t maxSizeOfJso
 
 		pTemporary = va_arg (pArgs, jsonStruct_t *);
 		if (pTemporary != NULL) {
-			snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument), remSizeOfJsonBuffer, "\"%s\":",
-					pTemporary->pKey);
+			//snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument), remSizeOfJsonBuffer, "\"%s\":",
+			//		pTemporary->pKey);
 			ret_val = checkReturnValueOfSnPrintf(snPrintfReturn, remSizeOfJsonBuffer);
 			if (ret_val != NONE_ERROR) {
 				return ret_val;
@@ -196,7 +196,7 @@ IoT_Error_t aws_iot_shadow_add_reported(char *pJsonDocument, size_t maxSizeOfJso
 	}
 
 	va_end(pArgs);
-	snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument) - 1, remSizeOfJsonBuffer, "},");
+	//snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument) - 1, remSizeOfJsonBuffer, "},");
 	ret_val = checkReturnValueOfSnPrintf(snPrintfReturn, remSizeOfJsonBuffer);
 	return ret_val;
 }
@@ -204,8 +204,8 @@ IoT_Error_t aws_iot_shadow_add_reported(char *pJsonDocument, size_t maxSizeOfJso
 
 int32_t FillWithClientTokenSize(char *pBufferToBeUpdatedWithClientToken, size_t maxSizeOfJsonDocument) {
 	int32_t snPrintfReturn;
-	snPrintfReturn = snprintf(pBufferToBeUpdatedWithClientToken, maxSizeOfJsonDocument, "%s-%d", mqttClientID,
-			clientTokenNum++);
+	//snPrintfReturn = snprintf(pBufferToBeUpdatedWithClientToken, maxSizeOfJsonDocument, "%s-%d", mqttClientID,
+	//		clientTokenNum++);
 
 	return snPrintfReturn;
 }
@@ -235,8 +235,8 @@ IoT_Error_t aws_iot_finalize_json_document(char *pJsonDocument, size_t maxSizeOf
 	remSizeOfJsonBuffer = tempSize;
 
 	// strlen(ShadowTxBuffer) - 1 is to ensure we remove the last ,(comma) that was added
-	snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument) - 1, remSizeOfJsonBuffer, "}, \"%s\":\"",
-			SHADOW_CLIENT_TOKEN_STRING);
+	//snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument) - 1, remSizeOfJsonBuffer, "}, \"%s\":\"",
+	//		SHADOW_CLIENT_TOKEN_STRING);
 	ret_val = checkReturnValueOfSnPrintf(snPrintfReturn, remSizeOfJsonBuffer);
 
 	if (ret_val != NONE_ERROR) {
@@ -263,7 +263,7 @@ IoT_Error_t aws_iot_finalize_json_document(char *pJsonDocument, size_t maxSizeOf
 	remSizeOfJsonBuffer = tempSize;
 
 
-	snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument), remSizeOfJsonBuffer, "\"}");
+	//snPrintfReturn = snprintf(pJsonDocument + strlen(pJsonDocument), remSizeOfJsonBuffer, "\"}");
 	ret_val = checkReturnValueOfSnPrintf(snPrintfReturn, remSizeOfJsonBuffer);
 
 	return ret_val;
@@ -281,7 +281,7 @@ static IoT_Error_t convertDataToString(char *pStringBuffer, size_t maxSizoString
 	if (maxSizoStringBuffer == 0) {
 		return SHADOW_JSON_ERROR;
 	}
-
+/*
 	if (type == SHADOW_JSON_INT32) {
 		snPrintfReturn = snprintf(pStringBuffer, maxSizoStringBuffer, "%"PRIi32",", *(int32_t * )(pData));
 	} else if (type == SHADOW_JSON_INT16) {
@@ -302,7 +302,7 @@ static IoT_Error_t convertDataToString(char *pStringBuffer, size_t maxSizoString
 		snPrintfReturn = snprintf(pStringBuffer, maxSizoStringBuffer, "%s,", *(bool *)(pData)?"true":"false");
 	} else if (type == SHADOW_JSON_STRING) {
 		snPrintfReturn = snprintf(pStringBuffer, maxSizoStringBuffer, "\"%s\",", (char * )(pData));
-	}
+	}*/
 
 	ret_val = checkReturnValueOfSnPrintf(snPrintfReturn, maxSizoStringBuffer);
 

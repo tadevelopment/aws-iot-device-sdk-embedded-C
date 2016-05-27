@@ -72,7 +72,7 @@ extern const ShadowParameters_t ShadowParametersDefault;
  * @param pClient	MQTT Client used as the protocol layer
  * @return An IoT Error Type defining successful/failed Initialization
  */
-IoT_Error_t aws_iot_shadow_init(MQTTClient_t *pClient);
+void aws_iot_shadow_init();
 /**
  * @brief Connect to the AWS IoT Thing Shadow service over MQTT
  *
@@ -82,7 +82,7 @@ IoT_Error_t aws_iot_shadow_init(MQTTClient_t *pClient);
  * @param pParams	Shadow Conenction parameters like TLS cert location
  * @return An IoT Error Type defining successful/failed Connection
  */
-IoT_Error_t aws_iot_shadow_connect(MQTTClient_t *pClient, ShadowParameters_t *pParams);
+IoT_Error_t aws_iot_shadow_connect(ShadowParameters_t *pParams);
 /**
  * @brief Yield function to let the background tasks of MQTT and Shadow
  *
@@ -94,7 +94,7 @@ IoT_Error_t aws_iot_shadow_connect(MQTTClient_t *pClient, ShadowParameters_t *pP
  * @param timeout	in milliseconds, This is the maximum time the yield function will wait for a message and/or read the messages from the TLS buffer
  * @return An IoT Error Type defining successful/failed Yield
  */
-IoT_Error_t aws_iot_shadow_yield(MQTTClient_t *pClient, int timeout);
+IoT_Error_t aws_iot_shadow_yield(int timeout);
 /**
  * @brief Disconnect from the AWS IoT Thing Shadow service over MQTT
  *
@@ -103,7 +103,7 @@ IoT_Error_t aws_iot_shadow_yield(MQTTClient_t *pClient, int timeout);
  * @param pClient	MQTT Client used as the protocol layer
  * @return An IoT Error Type defining successful/failed disconnect status
  */
-IoT_Error_t aws_iot_shadow_disconnect(MQTTClient_t *pClient);
+IoT_Error_t aws_iot_shadow_disconnect();
 
 /**
  * @brief Thing Shadow Acknowledgment enum
@@ -164,7 +164,7 @@ typedef void (*fpActionCallback_t)(const char *pThingName, ShadowActions_t actio
  * @param isPersistentSubscribe As mentioned above, every  time if a device updates the same shadow then this should be set to true to avoid repeated subscription and unsubscription. If the Thing Name is one off update then this should be set to false
  * @return An IoT Error Type defining successful/failed update action
  */
-IoT_Error_t aws_iot_shadow_update(MQTTClient_t *pClient, const char *pThingName, char *pJsonString,
+IoT_Error_t aws_iot_shadow_update(const char *pThingName, char *pJsonString,
 		fpActionCallback_t callback, void *pContextData, uint8_t timeout_seconds, bool isPersistentSubscribe);
 
 /**
@@ -181,7 +181,7 @@ IoT_Error_t aws_iot_shadow_update(MQTTClient_t *pClient, const char *pThingName,
  * @param isPersistentSubscribe As mentioned above, every  time if a device gets the same Sahdow (JSON document) then this should be set to true to avoid repeated subscription and un-subscription. If the Thing Name is one off get then this should be set to false
  * @return An IoT Error Type defining successful/failed get action
  */
-IoT_Error_t aws_iot_shadow_get(MQTTClient_t *pClient, const char *pThingName, fpActionCallback_t callback,
+IoT_Error_t aws_iot_shadow_get(const char *pThingName, fpActionCallback_t callback,
 		void *pContextData, uint8_t timeout_seconds, bool isPersistentSubscribe);
 /**
  * @brief This function is the one used to perform an Delete action to a Thing Name's Shadow.
@@ -197,7 +197,7 @@ IoT_Error_t aws_iot_shadow_get(MQTTClient_t *pClient, const char *pThingName, fp
  * @param isPersistentSubscribe As mentioned above, every  time if a device deletes the same Sahdow (JSON document) then this should be set to true to avoid repeated subscription and un-subscription. If the Thing Name is one off delete then this should be set to false
  * @return An IoT Error Type defining successful/failed delete action
  */
-IoT_Error_t aws_iot_shadow_delete(MQTTClient_t *pClient, const char *pThingName, fpActionCallback_t callback,
+IoT_Error_t aws_iot_shadow_delete(const char *pThingName, fpActionCallback_t callback,
 		void *pContextData, uint8_t timeout_seconds, bool isPersistentSubscriptions);
 
 /**
@@ -209,7 +209,7 @@ IoT_Error_t aws_iot_shadow_delete(MQTTClient_t *pClient, const char *pThingName,
  * @param pStruct The struct used to parse JSON value
  * @return An IoT Error Type defining successful/failed delta registering
  */
-IoT_Error_t aws_iot_shadow_register_delta(MQTTClient_t *pClient, jsonStruct_t *pStruct);
+IoT_Error_t aws_iot_shadow_register_delta(jsonStruct_t *pStruct);
 
 /**
  * @brief Reset the last received version number to zero.

@@ -313,15 +313,15 @@ bool aws_iot_is_autoreconnect_enabled(void) {
 	return MQTTIsAutoReconnectEnabled(&c);
 }
 
-void aws_iot_mqtt_init(MQTTClient_t *pClient){
-	pClient->connect = aws_iot_mqtt_connect;
-	pClient->disconnect = aws_iot_mqtt_disconnect;
-	pClient->isConnected = aws_iot_is_mqtt_connected;
-	pClient->reconnect = aws_iot_mqtt_attempt_reconnect;
-	pClient->publish = aws_iot_mqtt_publish;
-	pClient->subscribe = aws_iot_mqtt_subscribe;
-	pClient->unsubscribe = aws_iot_mqtt_unsubscribe;
-	pClient->yield = aws_iot_mqtt_yield;
-	pClient->isAutoReconnectEnabled = aws_iot_is_autoreconnect_enabled;
-	pClient->setAutoReconnectStatus = aws_iot_mqtt_autoreconnect_set_status;
-}
+//void aws_iot_mqtt_init(MQTTClient_t *pClient){
+//	pClient->connect = aws_iot_mqtt_connect;
+//	pClient->disconnect = aws_iot_mqtt_disconnect;
+//	pClient->isConnected = aws_iot_is_mqtt_connected;
+//	pClient->reconnect = aws_iot_mqtt_attempt_reconnect;
+//	pClient->publish = aws_iot_mqtt_publish;
+//	pClient->subscribe = aws_iot_mqtt_subscribe;
+//	pClient->unsubscribe = aws_iot_mqtt_unsubscribe;
+//	pClient->yield = aws_iot_mqtt_yield;
+//	pClient->isAutoReconnectEnabled = aws_iot_is_autoreconnect_enabled;
+//	pClient->setAutoReconnectStatus = aws_iot_mqtt_autoreconnect_set_status;
+//}

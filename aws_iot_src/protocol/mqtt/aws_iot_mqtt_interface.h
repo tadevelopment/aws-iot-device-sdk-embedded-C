@@ -280,16 +280,16 @@ bool aws_iot_is_autoreconnect_enabled(void);
  */
 IoT_Error_t aws_iot_mqtt_autoreconnect_set_status(bool value);
 
-typedef IoT_Error_t (*pConnectFunc_t)(MQTTConnectParams *pParams);
-typedef IoT_Error_t (*pPublishFunc_t)(MQTTPublishParams *pParams);
-typedef IoT_Error_t (*pSubscribeFunc_t)(MQTTSubscribeParams *pParams);
-typedef IoT_Error_t (*pUnsubscribeFunc_t)(char *pTopic);
-typedef IoT_Error_t (*pDisconnectFunc_t)(void);
-typedef IoT_Error_t (*pYieldFunc_t)(int timeout);
-typedef bool (*pIsConnectedFunc_t)(void);
-typedef bool (*pIsAutoReconnectEnabledFunc_t)(void);
-typedef IoT_Error_t (*pReconnectFunc_t)();
-typedef IoT_Error_t (*pSetAutoReconnectStatusFunc_t)(bool);
+IoT_Error_t aws_iot_mqtt_connect(MQTTConnectParams *pParams);
+IoT_Error_t aws_iot_mqtt_publish(MQTTPublishParams *pParams);
+IoT_Error_t aws_iot_mqtt_subscribe(MQTTSubscribeParams *pParams);
+IoT_Error_t aws_iot_mqtt_unsubscribe(char *pTopic);
+IoT_Error_t aws_iot_mqtt_disconnect(void);
+IoT_Error_t aws_iot_mqtt_yield(int timeout);
+bool 		aws_iot_is_mqtt_connected(void);
+bool 		aws_iot_is_autoreconnect_enabled(void);
+IoT_Error_t aws_iot_mqtt_attempt_reconnect();
+IoT_Error_t aws_iot_mqtt_autoreconnect_set_status(bool);
 /**
  * @brief MQTT Client Type Definition
  *
@@ -298,18 +298,18 @@ typedef IoT_Error_t (*pSetAutoReconnectStatusFunc_t)(bool);
  * can be swapped in under the MQTT/Shadow layer.
  *
  */
-typedef struct{
-	pConnectFunc_t connect;				///< function implementing the iot_mqtt_connect function
-	pPublishFunc_t publish;				///< function implementing the iot_mqtt_publish function
-	pSubscribeFunc_t subscribe;			///< function implementing the iot_mqtt_subscribe function
-	pUnsubscribeFunc_t unsubscribe;		///< function implementing the iot_mqtt_unsubscribe function
-	pDisconnectFunc_t disconnect;		///< function implementing the iot_mqtt_disconnect function
-	pYieldFunc_t yield;					///< function implementing the iot_mqtt_yield function
-	pIsConnectedFunc_t isConnected;		///< function implementing the iot_is_mqtt_connected function
-	pReconnectFunc_t reconnect;			///< function implementing the iot_mqtt_reconnect function
-	pIsAutoReconnectEnabledFunc_t isAutoReconnectEnabled;	///< function implementing the iot_is_autoreconnect_enabled function
-	pSetAutoReconnectStatusFunc_t setAutoReconnectStatus;	///< function implementing the iot_mqtt_autoreconnect_set_status function
-}MQTTClient_t;
+//typedef struct{
+//	pConnectFunc_t connect;				///< function implementing the iot_mqtt_connect function
+//	pPublishFunc_t publish;				///< function implementing the iot_mqtt_publish function
+//	pSubscribeFunc_t subscribe;			///< function implementing the iot_mqtt_subscribe function
+//	pUnsubscribeFunc_t unsubscribe;		///< function implementing the iot_mqtt_unsubscribe function
+//	pDisconnectFunc_t disconnect;		///< function implementing the iot_mqtt_disconnect function
+//	pYieldFunc_t yield;					///< function implementing the iot_mqtt_yield function
+//	pIsConnectedFunc_t isConnected;		///< function implementing the iot_is_mqtt_connected function
+//	pReconnectFunc_t reconnect;			///< function implementing the iot_mqtt_reconnect function
+//	pIsAutoReconnectEnabledFunc_t isAutoReconnectEnabled;	///< function implementing the iot_is_autoreconnect_enabled function
+//	pSetAutoReconnectStatusFunc_t setAutoReconnectStatus;	///< function implementing the iot_mqtt_autoreconnect_set_status function
+//}MQTTClient_t;
 
 
 /**
@@ -320,7 +320,7 @@ typedef struct{
  * interface functions.
  *
  */
-void aws_iot_mqtt_init(MQTTClient_t *pClient);
+//void aws_iot_mqtt_init(MQTTClient_t *pClient);
 
 
 #endif /* AWS_IOT_SDK_SRC_IOT_MQTT_INTERFACE_H_ */

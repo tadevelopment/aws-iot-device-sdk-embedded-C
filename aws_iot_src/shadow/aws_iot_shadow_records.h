@@ -28,7 +28,7 @@ extern bool shadowDiscardOldDeltaFlag;
 extern char myThingName[MAX_SIZE_OF_THING_NAME];
 extern char mqttClientID[MAX_SIZE_OF_UNIQUE_CLIENT_ID_BYTES];
 
-void initializeRecords(MQTTClient_t *pClient);
+void initializeRecords();
 bool isSubscriptionPresent(const char *pThingName, ShadowActions_t action);
 IoT_Error_t subscribeToShadowActionAcks(const char *pThingName, ShadowActions_t action, bool isSticky);
 void incrementSubscriptionCnt(const char *pThingName, ShadowActions_t action, bool isSticky);
