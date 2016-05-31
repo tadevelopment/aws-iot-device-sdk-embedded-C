@@ -31,6 +31,20 @@
 #include "aws_iot_error.h"
 #include "jsmn.h"
 
+
+/**
+ * Emulates snprintf for a simple append operation.  The dest buffer
+ * will be null-terminated, and no more than dst size bytes will be written
+ * @param dst The buffer we are appending to
+ * @param dst_size The size of the destination buffer in bytes
+ * @param str The string to append
+ * @return The total number of characters appended
+ */
+uint16_t str_append(char* dst, uint16_t dst_size, const char* str);
+
+
+uint16_t str_append_wrap( char* dst, uint16_t dst_size, const char* pre, const char* str, const char* post);
+
 // utility functions
 /**
  * @brief          JSON Equality Check

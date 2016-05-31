@@ -95,7 +95,7 @@ IoT_Error_t registerJsonTokenOnDelta(jsonStruct_t *pStruct) {
 	if (!deltaTopicSubscribedFlag) {
 		MQTTSubscribeParams subParams;
 		subParams.mHandler = shadow_delta_callback;
-		//snprintf(shadowDeltaTopic,MAX_SHADOW_TOPIC_LENGTH_BYTES, "$aws/things/%s/shadow/update/delta", myThingName);
+		str_append_wrap( shadowDeltaTopic, MAX_SHADOW_TOPIC_LENGTH_BYTES, "$aws/things/", myThingName, "/shadow/update/delta" );
 		subParams.pTopic = shadowDeltaTopic;
 		subParams.qos = QOS_0;
 		rc = aws_iot_mqtt_subscribe(&subParams);

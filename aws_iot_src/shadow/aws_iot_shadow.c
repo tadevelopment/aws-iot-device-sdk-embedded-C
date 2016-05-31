@@ -19,6 +19,7 @@
 #include "aws_iot_shadow_json.h"
 #include "aws_iot_shadow_key.h"
 #include "aws_iot_shadow_records.h"
+#include "aws_iot_json_utils.h"
 
 const ShadowParameters_t ShadowParametersDefault
 #ifndef __XC
@@ -61,8 +62,8 @@ IoT_Error_t aws_iot_shadow_connect(ShadowParameters_t *pParams) {
 	IoT_Error_t rc = NONE_ERROR;
 	MQTTConnectParams ConnectParams = MQTTConnectParamsDefault;
 
-	//snprintf(myThingName, MAX_SIZE_OF_THING_NAME, "%s", pParams->pMyThingName );
-	//snprintf(mqttClientID, MAX_SIZE_OF_UNIQUE_CLIENT_ID_BYTES, "%s", pParams->pMqttClientId );
+    str_append(myThingName, MAX_SIZE_OF_THING_NAME, pParams->pMyThingName);
+    str_append(mqttClientID, MAX_SIZE_OF_UNIQUE_CLIENT_ID_BYTES, pParams->pMqttClientId);
 
 	DEBUG("Thing Name %s", myThingName);
 	DEBUG("MQTT Client ID %s", mqttClientID);
@@ -129,38 +130,39 @@ IoT_Error_t aws_iot_shadow_update(const char *pThingName, char *pJsonString,
 
 	return ret_val;
 }
-//
-//IoT_Error_t aws_iot_shadow_delete(const char *pThingName, fpActionCallback_t callback,
-//		void *pContextData, uint8_t timeout_seconds, bool isPersistentSubscriptions) {
-//	IoT_Error_t ret_val = NONE_ERROR;
-//
-//	if (!aws_iot_is_mqtt_connected()) {
-//		return CONNECTION_ERROR;
-//	}
-//
-//	char deleteRequestJsonBuf[MAX_SIZE_CLIENT_TOKEN_CLIENT_SEQUENCE];
-//	iot_shadow_delete_request_json(deleteRequestJsonBuf);
-//	ret_val = iot_shadow_action(pThingName, SHADOW_DELETE, deleteRequestJsonBuf, callback, pContextData, timeout_seconds,
-//			isPersistentSubscriptions);
-//
-//	return ret_val;
-//}
-//
-//IoT_Error_t aws_iot_shadow_get(const char *pThingName, fpActionCallback_t callback,
-//		void *pContextData, uint8_t timeout_seconds, bool isPersistentSubscribe) {
-//
-//	IoT_Error_t ret_val = NONE_ERROR;
-//
-//	if (!aws_iot_is_mqtt_connected()) {
-//		return CONNECTION_ERROR;
-//	}
-//
-//	char getRequestJsonBuf[MAX_SIZE_CLIENT_TOKEN_CLIENT_SEQUENCE];
-//
-//	iot_shadow_get_request_json(getRequestJsonBuf);
-//
-//	ret_val = iot_shadow_action(pThingName, SHADOW_GET, getRequestJsonBuf, callback, pContextData, timeout_seconds,
-//			isPersistentSubscribe);
-//
-//	return ret_val;
-//}
+
+
+IoT_Error_t aws_iot_shadow_delete(const char *pThingName, fpActionCallback_t callback,
+		void *pContextData, uint8_t timeout_seconds, bool isPersistentSubscriptions) {
+	IoT_Error_t ret_val = NONE_ERROR;
+
+	if (!aws_iot_is_mqtt_connected()) {
+		return CONNECTION_ERROR;
+	}
+
+	char deleteRequestJsonBuf[MAX_SIZE_CLIENT_TOKEN_CLIENT_SEQUENCE];
+	iot_shadow_delete_request_json(deleteRequestJsonBuf, MAX_SIZE_CLIENT_TOKEN_CLIENT_SEQUENCE );
+	ret_val = iot_shadow_action(pThingName, SHADOW_DELETE, deleteRequestJsonBuf, callback, pContextData, timeout_seconds,
+			isPersistentSubscriptions);
+
+	return ret_val;
+}
+
+IoT_Error_t aws_iot_shadow_get(const char *pThingName, fpActionCallback_t callback,
+		void *pContextData, uint8_t timeout_seconds, bool isPersistentSubscribe) {
+
+	IoT_Error_t ret_val = NONE_ERROR;
+
+	if (!aws_iot_is_mqtt_connected()) {
+		return CONNECTION_ERROR;
+	}
+
+	char getRequestJsonBuf[MAX_SIZE_CLIENT_TOKEN_CLIENT_SEQUENCE];
+
+	iot_shadow_get_request_json(getRequestJsonBuf, MAX_SIZE_CLIENT_TOKEN_CLIENT_SEQUENCE );
+
+	ret_val = iot_shadow_action(pThingName, SHADOW_GET, getRequestJsonBuf, callback, pContextData, timeout_seconds,
+			isPersistentSubscribe);
+
+	return ret_val;
+}

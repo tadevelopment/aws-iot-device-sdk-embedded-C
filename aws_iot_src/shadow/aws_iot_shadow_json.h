@@ -26,8 +26,8 @@ bool isJsonValidAndParse(const char *pJsonDocument, void *pJsonHandler, int32_t 
 bool isJsonKeyMatchingAndUpdateValue(const char *pJsonDocument, void *pJsonHandler, int32_t tokenCount,
 		jsonStruct_t *pDataStruct, uint32_t *pDataLength, int32_t *pDataPosition);
 
-void iot_shadow_get_request_json(char *pJsonDocument);
-void iot_shadow_delete_request_json(char *pJsonDocument);
+void iot_shadow_get_request_json(char *pJsonDocument, uint16_t bufferSize);
+void iot_shadow_delete_request_json(char *pJsonDocument, uint16_t bufferSize);
 void resetClientTokenSequenceNum(void);
 
 

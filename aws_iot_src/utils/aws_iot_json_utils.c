@@ -30,7 +30,41 @@
 #include <string.h>
 #include "aws_iot_log.h"
 
-int8_t jsoneq(const char *json, jsmntok_t *tok, const char *s) {
+uint16_t str_append(char* dst, uint16_t dst_size, const char* str)
+{
+    if (dst == NULL || str == NULL || dst_size == 0)
+        return 0;
+        
+	uint16_t written = 0;
+    while(*str != '\0')
+    {
+        if (++written < dst_size)
+        {
+            *(dst++) = *str;
+        }
+		str++;
+    }
+    // Always NULL-terminate
+    *dst = '\0';
+    return written;
+}
+
+uint16_t str_append_wrap( char* dst, uint16_t dst_size, const char* pre, const char* str, const char* post )
+{
+	uint16_t written = str_append( dst, dst_size, pre );
+	if (written >= dst_size)
+		return written;
+
+	written += str_append( dst + written, dst_size - written, str );
+	if (written >= dst_size)
+		return written;
+
+	written += str_append( dst + written, dst_size - written, post );
+	
+	return written;
+}
+
+int8_t jsoneq( const char *json, jsmntok_t *tok, const char *s ) {
 	if (tok->type == JSMN_STRING) {
 		if ((int) strlen(s) == tok->end - tok->start) {
 			if (strncmp(json + tok->start, s, tok->end - tok->start) == 0) {
