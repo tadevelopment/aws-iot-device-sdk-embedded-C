@@ -27,6 +27,14 @@
 
 int iot_tls_init(Network *pNetwork) {
 
+    pNetwork->my_socket = 0;
+	pNetwork->connect = iot_tls_connect;
+	pNetwork->mqttread = iot_tls_read;
+	pNetwork->mqttwrite = iot_tls_write;
+	pNetwork->disconnect = iot_tls_disconnect;
+	pNetwork->isConnected = iot_tls_is_connected;
+	pNetwork->destroy = iot_tls_destroy;
+    
 	IoT_Error_t ret_val = NONE_ERROR;
     // TODO
 	return ret_val;
@@ -49,7 +57,7 @@ int iot_tls_connect(Network *pNetwork, TLSConnectParams params) {
 
 int iot_tls_write(Network *pNetwork, unsigned char *pMsg, int len, int timeout_ms){
     // TODO
-	return NONE_ERROR;
+	return len;
 }
 
 int iot_tls_read(Network *pNetwork, unsigned char *pMsg, int len, int timeout_ms) {
