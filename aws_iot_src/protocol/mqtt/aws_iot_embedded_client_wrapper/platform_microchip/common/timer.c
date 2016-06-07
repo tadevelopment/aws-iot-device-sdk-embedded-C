@@ -22,24 +22,24 @@
 
 #include "timer.h"
 #include "timer_interface.h"
+#include "INCLUDES.H"
 
 char expired(Timer* timer) {
-    return 0;
+    return timer->m_timeval > TTime._dword;
 }
 
 void countdown_ms(Timer* timer, unsigned int timeout) {
-	// TODO
+    timer->m_timeval = TTime._dword + timeout;
 }
 
 void countdown(Timer* timer, unsigned int timeout) {
-	// TODO
+    timer->m_timeval = TTime._dword + (1000 * timeout);
 }
 
 int left_ms(Timer* timer) {
-    // TODO
-	return 0;
+    return timer->m_timeval - TTime._dword;
 }
 
 void InitTimer(Timer* timer) {
-    // Nothing to do?
+    // Nothing to do
 }
