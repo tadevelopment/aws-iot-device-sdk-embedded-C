@@ -41,7 +41,7 @@ int wolfSSL_X509_NAME_get_text_by_NID( WOLFSSL_X509_NAME* name,
  */
 static HostnameValidationResult matches_common_name(const char *hostname, const X509 *server_cert) 
 {	
-	X509_NAME_ENTRY *common_name_entry = NULL;
+	//X509_NAME_ENTRY *common_name_entry = NULL;
 
 	char common_name_str[ASN_NAME_MAX];
 	uint16_t common_name_len = ASN_NAME_MAX; // Init to max val, this will throw comp warning if its possible to overflow
@@ -60,9 +60,9 @@ static HostnameValidationResult matches_common_name(const char *hostname, const 
 	//// Extract the CN field
 	//common_name_entry = X509_NAME_get_entry(
 	//		X509_get_subject_name((X509 *) server_cert), common_name_loc);
-	if (common_name_entry == NULL) {
-		return Error;
-	}
+	//if (common_name_entry == NULL) {
+	//	return Error;
+	//}
 
 	//// Convert the CN field to a C string
 	//common_name_asn1 = X509_NAME_ENTRY_get_data(common_name_entry);

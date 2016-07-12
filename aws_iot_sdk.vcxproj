@@ -45,7 +45,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <DisableSpecificWarnings>4100</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(ProjectDir)aws_mqtt_embedded_client_lib\MQTTClient-C\src\;$(ProjectDir)aws_iot_src\shadow;$(ProjectDir)aws_iot_src\protocol\mqtt;$(ProjectDir)aws_iot_src\utils;$(ProjectDir)aws_mqtt_embedded_client_lib\MQTTPacket\src;$(ProjectDir)aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\;$(ProjectDir)aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\common;$(ProjectDir)..\wolfssl\IDE\WIN\;$(ProjectDir)..\wolfSSL\;$(ProjectDir)..\wolfSSL\wolfssl\;$(ProjectDir)..\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)aws_mqtt_embedded_client_lib\MQTTClient-C\src\;$(ProjectDir)aws_iot_src\shadow;$(ProjectDir)aws_iot_src\protocol\mqtt;$(ProjectDir)aws_iot_src\utils;$(ProjectDir)aws_mqtt_embedded_client_lib\MQTTPacket\src;$(ProjectDir)aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\;$(ProjectDir)aws_iot_src\protocol\mqtt\aws_iot_embedded_client_wrapper\platform_windows\common;$(ProjectDir)..\wolfssl\IDE\WIN\;$(ProjectDir)..\wolfSSL\;$(ProjectDir)..\wolfSSL\wolfssl\;$(ProjectDir)..\;$(ProjectDir)..\EMS</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Condition="'$(Configuration)'=='Debug'">
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
